@@ -21,6 +21,9 @@ import (
 	"encoding/json"
 )
 
+// FlagSets are key-value pair of flags
+type FlagSets map[string]interface{}
+
 // Options represents a wkhtmlpdf attributes
 type Options struct {
 	GlobalOptions
@@ -48,4 +51,39 @@ func NewOptionsFromJSON(data []byte) (*Options, error) {
 	}
 
 	return opts, nil
+}
+
+// Flags generates flag key-value-map pairs from Options
+func (opts *Options) Flags() FlagSets {
+	fss := make(FlagSets)
+
+	if opts.MarginTop != nil {
+		fss["margin-top"] = *opts.MarginTop
+	}
+
+	if opts.MarginBottom != nil {
+		fss["margin-bottom"] = *opts.MarginBottom
+	}
+
+	if opts.MarginLeft != nil {
+		fss["margin-left"] = *opts.MarginLeft
+	}
+
+	if opts.MarginRight != nil {
+		fss["margin-right"] = *opts.MarginRight
+	}
+
+	if opts.PageHeight != nil {
+		fss["page-height"] = *opts.PageHeight
+	}
+
+	if opts.PageWidth != nil {
+		fss["page-width"] = *opts.PageWidth
+	}
+
+	if opts.PageSize != nil {
+		fss["page-size"] = *opts.PageSize
+	}
+
+	return fss
 }

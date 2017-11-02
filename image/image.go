@@ -21,6 +21,9 @@ import (
 	"encoding/json"
 )
 
+// FlagSets are key-value pair of flags
+type FlagSets map[string]interface{}
+
 // Options represents a wkhtmlimage attributes
 type Options struct {
 	GeneralOptions
@@ -48,4 +51,39 @@ func NewOptionsFromJSON(data []byte) (*Options, error) {
 	}
 
 	return opts, nil
+}
+
+// Flags generates flag key-value-map pairs from Options
+func (opts *Options) Flags() FlagSets {
+	fss := make(FlagSets)
+
+	if opts.CropH != nil {
+		fss["crop-h"] = *opts.CropH
+	}
+
+	if opts.CropW != nil {
+		fss["crop-w"] = *opts.CropW
+	}
+
+	if opts.CropX != nil {
+		fss["crop-x"] = *opts.CropX
+	}
+
+	if opts.CropY != nil {
+		fss["crop-y"] = *opts.CropY
+	}
+
+	if opts.Format != nil {
+		fss["format"] = *opts.Format
+	}
+
+	if opts.Height != nil {
+		fss["height"] = *opts.Height
+	}
+
+	if opts.Width != nil {
+		fss["width"] = *opts.Width
+	}
+
+	return fss
 }
