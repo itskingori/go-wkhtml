@@ -87,3 +87,52 @@ func (opts *Options) Flags() FlagSets {
 
 	return fss
 }
+
+// GetCropH retrieves the CropH from FlagSets
+func (fss *FlagSets) GetCropH() (int, bool) {
+	value, exists := (*fss)["crop-h"]
+
+	return value.(int), exists
+}
+
+// GetCropW retrieves the CropW from FlagSets
+func (fss *FlagSets) GetCropW() (int, bool) {
+	value, exists := (*fss)["crop-w"]
+
+	return value.(int), exists
+}
+
+// GetCropX retrieves the CropX from FlagSets
+func (fss *FlagSets) GetCropX() (int, bool) {
+	value, exists := (*fss)["crop-x"]
+
+	return value.(int), exists
+}
+
+// GetCropY retrieves the CropY from FlagSets
+func (fss *FlagSets) GetCropY() (int, bool) {
+	value, exists := (*fss)["crop-y"]
+
+	return value.(int), exists
+}
+
+// GetFormat retrieves the Format from FlagSets
+func (fss *FlagSets) GetFormat() (string, bool) {
+	value, exists := (*fss)["format"]
+
+	return value.(string), exists
+}
+
+// GetHeight retrieves the Height from FlagSets
+func (fss *FlagSets) GetHeight() (int, bool) {
+	value, exists := (*fss)["height"]
+
+	return value.(int), exists
+}
+
+// GetWidth retrieves the Width from FlagSets
+func (fss *FlagSets) GetWidth() (int, bool) {
+	value, exists := (*fss)["width"]
+
+	return value.(int), exists
+}

@@ -120,3 +120,73 @@ func TestFlags(t *testing.T) {
 		t.Fatalf("expected %s to be %s, got %s", "width", "A4", flags["page-size"])
 	}
 }
+
+func TestGetMarginTop(t *testing.T) {
+	fss := make(pdf.FlagSets)
+	fss["margin-top"] = 10
+
+	value, exists := fss.GetMarginTop()
+	if exists != true || value != 10 {
+		t.Fatalf("expected %s to be %d, got %d", "margin-top", fss["margin-top"], value)
+	}
+}
+
+func TestGetMarginBottom(t *testing.T) {
+	fss := make(pdf.FlagSets)
+	fss["margin-bottom"] = 10
+
+	value, exists := fss.GetMarginBottom()
+	if exists != true || value != 10 {
+		t.Fatalf("expected %s to be %d, got %d", "margin-bottom", fss["margin-bottom"], value)
+	}
+}
+
+func TestGetMarginLeft(t *testing.T) {
+	fss := make(pdf.FlagSets)
+	fss["margin-left"] = 10
+
+	value, exists := fss.GetMarginLeft()
+	if exists != true || value != 10 {
+		t.Fatalf("expected %s to be %d, got %d", "margin-left", fss["margin-left"], value)
+	}
+}
+
+func TestGetMarginRight(t *testing.T) {
+	fss := make(pdf.FlagSets)
+	fss["margin-right"] = 10
+
+	value, exists := fss.GetMarginRight()
+	if exists != true || value != 10 {
+		t.Fatalf("expected %s to be %d, got %d", "margin-right", fss["margin-right"], value)
+	}
+}
+
+func TestGetPageHeight(t *testing.T) {
+	fss := make(pdf.FlagSets)
+	fss["page-height"] = 10
+
+	value, exists := fss.GetPageHeight()
+	if exists != true || value != 10 {
+		t.Fatalf("expected %s to be %d, got %d", "page-height", fss["page-height"], value)
+	}
+}
+
+func TestGetPageWidth(t *testing.T) {
+	fss := make(pdf.FlagSets)
+	fss["page-width"] = 10
+
+	value, exists := fss.GetPageWidth()
+	if exists != true || value != 10 {
+		t.Fatalf("expected %s to be %d, got %d", "page-width", fss["page-width"], value)
+	}
+}
+
+func TestGetPageSize(t *testing.T) {
+	fss := make(pdf.FlagSets)
+	fss["page-size"] = "A4"
+
+	value, exists := fss.GetPageSize()
+	if exists != true || value != "A4" {
+		t.Fatalf("expected %s to be %s, got %s", "page-size", fss["page-size"], value)
+	}
+}

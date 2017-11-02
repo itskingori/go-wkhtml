@@ -120,3 +120,73 @@ func TestFlags(t *testing.T) {
 		t.Fatalf("expected %s to be %d, got %d", "width", 10, flags["width"])
 	}
 }
+
+func TestGetCropH(t *testing.T) {
+	fss := make(image.FlagSets)
+	fss["crop-h"] = 10
+
+	value, exists := fss.GetCropH()
+	if exists != true || value != 10 {
+		t.Fatalf("expected %s to be %d, got %d", "crop-h", fss["crop-h"], value)
+	}
+}
+
+func TestGetCropW(t *testing.T) {
+	fss := make(image.FlagSets)
+	fss["crop-w"] = 10
+
+	value, exists := fss.GetCropW()
+	if exists != true || value != 10 {
+		t.Fatalf("expected %s to be %d, got %d", "crop-w", fss["crop-w"], value)
+	}
+}
+
+func TestGetCropX(t *testing.T) {
+	fss := make(image.FlagSets)
+	fss["crop-x"] = 10
+
+	value, exists := fss.GetCropX()
+	if exists != true || value != 10 {
+		t.Fatalf("expected %s to be %d, got %d", "crop-x", fss["crop-x"], value)
+	}
+}
+
+func TestGetCropY(t *testing.T) {
+	fss := make(image.FlagSets)
+	fss["crop-y"] = 10
+
+	value, exists := fss.GetCropY()
+	if exists != true || value != 10 {
+		t.Fatalf("expected %s to be %d, got %d", "crop-y", fss["crop-y"], value)
+	}
+}
+
+func TestGetFormat(t *testing.T) {
+	fss := make(image.FlagSets)
+	fss["format"] = "png"
+
+	value, exists := fss.GetFormat()
+	if exists != true || value != "png" {
+		t.Fatalf("expected %s to be %s, got %s", "format", fss["format"], value)
+	}
+}
+
+func TestGetHeight(t *testing.T) {
+	fss := make(image.FlagSets)
+	fss["height"] = 10
+
+	value, exists := fss.GetHeight()
+	if exists != true || value != 10 {
+		t.Fatalf("expected %s to be %d, got %d", "height", fss["height"], value)
+	}
+}
+
+func TestGetWidth(t *testing.T) {
+	fss := make(image.FlagSets)
+	fss["width"] = 10
+
+	value, exists := fss.GetWidth()
+	if exists != true || value != 10 {
+		t.Fatalf("expected %s to be %d, got %d", "width", fss["width"], value)
+	}
+}

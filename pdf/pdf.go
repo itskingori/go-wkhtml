@@ -87,3 +87,52 @@ func (opts *Options) Flags() FlagSets {
 
 	return fss
 }
+
+// GetMarginTop retrieves the MarginTop from FlagSets
+func (fss *FlagSets) GetMarginTop() (int, bool) {
+	value, exists := (*fss)["margin-top"]
+
+	return value.(int), exists
+}
+
+// GetMarginBottom retrieves the MarginBottom from FlagSets
+func (fss *FlagSets) GetMarginBottom() (int, bool) {
+	value, exists := (*fss)["margin-bottom"]
+
+	return value.(int), exists
+}
+
+// GetMarginLeft retrieves the MarginLeft from FlagSets
+func (fss *FlagSets) GetMarginLeft() (int, bool) {
+	value, exists := (*fss)["margin-left"]
+
+	return value.(int), exists
+}
+
+// GetMarginRight retrieves the MarginRight from FlagSets
+func (fss *FlagSets) GetMarginRight() (int, bool) {
+	value, exists := (*fss)["margin-right"]
+
+	return value.(int), exists
+}
+
+// GetPageHeight retrieves the PageHeight from FlagSets
+func (fss *FlagSets) GetPageHeight() (int, bool) {
+	value, exists := (*fss)["page-height"]
+
+	return value.(int), exists
+}
+
+// GetPageWidth retrieves the PageWidth from FlagSets
+func (fss *FlagSets) GetPageWidth() (int, bool) {
+	value, exists := (*fss)["page-width"]
+
+	return value.(int), exists
+}
+
+// GetPageSize retrieves the PageSize from FlagSets
+func (fss *FlagSets) GetPageSize() (string, bool) {
+	value, exists := (*fss)["page-size"]
+
+	return value.(string), exists
+}
