@@ -89,7 +89,7 @@ func TestFlags(t *testing.T) {
 		Width:  &width,
 	}
 
-	opts := image.Options{gopts}
+	opts := image.Options{GeneralOptions: gopts}
 	flags := opts.Flags()
 
 	if flags["crop-h"] != 10 {
