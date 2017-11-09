@@ -121,6 +121,19 @@ func TestFlags(t *testing.T) {
 	}
 }
 
+func TestString(t *testing.T) {
+	fss := make(image.FlagSets)
+	fss["crop-h"] = 10
+	fss["format"] = "png"
+
+	expected := "--crop-h=10 --format=png"
+	got := fss.String()
+
+	if expected != got {
+		t.Fatalf("expected '%s' but got '%s'", expected, got)
+	}
+}
+
 func TestGetCropH(t *testing.T) {
 	fss := make(image.FlagSets)
 	fss["crop-h"] = 10

@@ -121,6 +121,19 @@ func TestFlags(t *testing.T) {
 	}
 }
 
+func TestString(t *testing.T) {
+	fss := make(pdf.FlagSets)
+	fss["margin-top"] = 10
+	fss["page-size"] = "A4"
+
+	expected := "--margin-top=10 --page-size=A4"
+	got := fss.String()
+
+	if expected != got {
+		t.Fatalf("expected '%s' but got '%s'", expected, got)
+	}
+}
+
 func TestGetMarginTop(t *testing.T) {
 	fss := make(pdf.FlagSets)
 	fss["margin-top"] = 10

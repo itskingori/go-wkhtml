@@ -18,6 +18,9 @@
 package pdf
 
 import (
+	"fmt"
+	"strings"
+
 	"encoding/json"
 )
 
@@ -86,6 +89,17 @@ func (opts *Options) Flags() FlagSets {
 	}
 
 	return fss
+}
+
+// String converts a FlagSet to a String
+func (fss *FlagSets) String() string {
+	var flags []string
+
+	for flagKey, flagValue := range *fss {
+		flags = append(flags, fmt.Sprintf("--%s=%v", flagKey, flagValue))
+	}
+
+	return strings.Join(flags, " ")
 }
 
 // GetMarginTop retrieves the MarginTop from FlagSets
