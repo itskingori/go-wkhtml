@@ -19,6 +19,7 @@ package pdf_test
 
 import (
 	"reflect"
+	"sort"
 	"testing"
 
 	"github.com/itskingori/go-wkhtml/pdf"
@@ -129,6 +130,9 @@ func TestFlagSetFlags(t *testing.T) {
 
 	expected := []string{"--margin-top=10", "--page-size=A4"}
 	got := fss.Flags()
+
+	sort.Strings(expected)
+	sort.Strings(got)
 
 	if !reflect.DeepEqual(expected, got) {
 		t.Fatalf("expected '%s' but got '%s'", expected, got)
