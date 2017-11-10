@@ -19,13 +19,10 @@ package image
 
 import (
 	"fmt"
-	"os"
 	"strings"
 
 	"encoding/json"
-	"io/ioutil"
 	"os/exec"
-	"path/filepath"
 )
 
 const (
@@ -160,29 +157,18 @@ func (fss *FlagSets) GetWidth() (int, bool) {
 }
 
 // Generate creates an image based on the parameters passed in
-func Generate(fss *FlagSets, inputURL string, filename string) ([]byte, string, error) {
-	var (
-		out  []byte
-		path string
-	)
+func Generate(fss *FlagSets, inputURL string, outputFile string) ([]byte, error) {
+	var out []byte
 
-	dir, err := ioutil.TempDir("", fmt.Sprintf("%s-", binaryName))
-	if err != nil {
-		return out, path, err
-	}
-
-	defer os.RemoveAll(dir)
-
-	path = filepath.Join(dir, filename)
 	params := fss.Flags()
-	params = append(params, inputURL, path)
+	params = append(params, inputURL, outputFile)
 	cmd := exec.Command(binaryName, params...)
-	out, err = cmd.CombinedOutput()
+	out, err := cmd.CombinedOutput()
 	if err != nil {
-		return out, path, err
+		return out, err
 	}
 
-	return out, path, err
+	return out, err
 }
 
 // LookupConverterBinary checks if the wkhtmltoimage executable exits
