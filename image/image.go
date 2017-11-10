@@ -22,6 +22,7 @@ import (
 	"strings"
 
 	"encoding/json"
+	"os/exec"
 )
 
 // FlagSets are key-value pair of flags
@@ -149,4 +150,20 @@ func (fss *FlagSets) GetWidth() (int, bool) {
 	value, exists := (*fss)["width"]
 
 	return value.(int), exists
+}
+
+// LookupConverterBinary checks if the wkhtmltoimage executable exits
+func LookupConverterBinary() (string, string, error) {
+	var version string
+
+	path, err := exec.LookPath("wkhtmltoimage")
+	if err != nil {
+		return path, version, err
+	}
+
+	cmd := exec.Command("wkhtmltoimage", "--version")
+	out, err := cmd.CombinedOutput()
+	version = strings.TrimRight(string(out), "\r\n")
+
+	return path, version, err
 }

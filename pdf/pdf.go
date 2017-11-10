@@ -22,6 +22,7 @@ import (
 	"strings"
 
 	"encoding/json"
+	"os/exec"
 )
 
 // FlagSets are key-value pair of flags
@@ -149,4 +150,20 @@ func (fss *FlagSets) GetPageSize() (string, bool) {
 	value, exists := (*fss)["page-size"]
 
 	return value.(string), exists
+}
+
+// LookupConverterBinary checks if the wkhtmltopdf executable exits
+func LookupConverterBinary() (string, string, error) {
+	var version string
+
+	path, err := exec.LookPath("wkhtmltopdf")
+	if err != nil {
+		return path, version, err
+	}
+
+	cmd := exec.Command("wkhtmltopdf", "--version")
+	out, err := cmd.CombinedOutput()
+	version = strings.TrimRight(string(out), "\r\n")
+
+	return path, version, err
 }
