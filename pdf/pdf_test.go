@@ -72,7 +72,7 @@ func TestNewOptionsFromJSON(t *testing.T) {
 	}
 }
 
-func TestFlags(t *testing.T) {
+func TestOptionsFlags(t *testing.T) {
 	marginTop := 10
 	marginBottom := 10
 	marginLeft := 10

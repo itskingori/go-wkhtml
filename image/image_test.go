@@ -72,7 +72,7 @@ func TestNewOptionsFromJSON(t *testing.T) {
 	}
 }
 
-func TestFlags(t *testing.T) {
+func TestOptionsFlags(t *testing.T) {
 	cropH := 10
 	cropW := 10
 	cropX := 10
