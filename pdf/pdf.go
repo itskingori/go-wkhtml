@@ -25,6 +25,10 @@ import (
 	"os/exec"
 )
 
+const (
+	binaryName = "wkhtmltopdf"
+)
+
 // FlagSets are key-value pair of flags
 type FlagSets map[string]interface{}
 
@@ -156,12 +160,12 @@ func (fss *FlagSets) GetPageSize() (string, bool) {
 func LookupConverterBinary() (string, string, error) {
 	var version string
 
-	path, err := exec.LookPath("wkhtmltopdf")
+	path, err := exec.LookPath(binaryName)
 	if err != nil {
 		return path, version, err
 	}
 
-	cmd := exec.Command("wkhtmltopdf", "--version")
+	cmd := exec.Command(binaryName, "--version")
 	out, err := cmd.CombinedOutput()
 	version = strings.TrimRight(string(out), "\r\n")
 
