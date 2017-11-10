@@ -92,15 +92,15 @@ func (opts *Options) Flags() FlagSets {
 	return fss
 }
 
-// String converts a FlagSet to a String
-func (fss *FlagSets) String() string {
+// Flags converts a FlagSet to a String slice
+func (fss *FlagSets) Flags() []string {
 	var flags []string
 
 	for flagKey, flagValue := range *fss {
 		flags = append(flags, fmt.Sprintf("--%s=%v", flagKey, flagValue))
 	}
 
-	return strings.Join(flags, " ")
+	return flags
 }
 
 // GetCropH retrieves the CropH from FlagSets

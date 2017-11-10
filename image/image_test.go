@@ -18,6 +18,7 @@
 package image_test
 
 import (
+	"reflect"
 	"testing"
 
 	"github.com/itskingori/go-wkhtml/image"
@@ -121,15 +122,15 @@ func TestFlags(t *testing.T) {
 	}
 }
 
-func TestString(t *testing.T) {
+func TestFlagSetFlags(t *testing.T) {
 	fss := make(image.FlagSets)
 	fss["crop-h"] = 10
 	fss["format"] = "png"
 
-	expected := "--crop-h=10 --format=png"
-	got := fss.String()
+	expected := []string{"--crop-h=10", "--format=png"}
+	got := fss.Flags()
 
-	if expected != got {
+	if !reflect.DeepEqual(expected, got) {
 		t.Fatalf("expected '%s' but got '%s'", expected, got)
 	}
 }

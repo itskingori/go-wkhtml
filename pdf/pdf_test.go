@@ -18,6 +18,7 @@
 package pdf_test
 
 import (
+	"reflect"
 	"testing"
 
 	"github.com/itskingori/go-wkhtml/pdf"
@@ -89,7 +90,7 @@ func TestFlags(t *testing.T) {
 		PageSize:     &pageSize,
 	}
 
-	opts := pdf.Options{gopts}
+	opts := pdf.Options{GlobalOptions: gopts}
 	flags := opts.Flags()
 
 	if flags["margin-top"] != 10 {
@@ -121,15 +122,15 @@ func TestFlags(t *testing.T) {
 	}
 }
 
-func TestString(t *testing.T) {
+func TestFlagSetFlags(t *testing.T) {
 	fss := make(pdf.FlagSets)
 	fss["margin-top"] = 10
 	fss["page-size"] = "A4"
 
-	expected := "--margin-top=10 --page-size=A4"
-	got := fss.String()
+	expected := []string{"--margin-top=10", "--page-size=A4"}
+	got := fss.Flags()
 
-	if expected != got {
+	if !reflect.DeepEqual(expected, got) {
 		t.Fatalf("expected '%s' but got '%s'", expected, got)
 	}
 }
