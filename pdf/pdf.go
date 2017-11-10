@@ -156,6 +156,21 @@ func (fss *FlagSets) GetPageSize() (string, bool) {
 	return value.(string), exists
 }
 
+// Generate creates an pdf based on the parameters passed in
+func Generate(fss *FlagSets, input string, output string) ([]byte, error) {
+	var out []byte
+
+	params := fss.Flags()
+	params = append(params, input, output)
+	cmd := exec.Command(binaryName, params...)
+	out, err := cmd.CombinedOutput()
+	if err != nil {
+		return out, err
+	}
+
+	return out, err
+}
+
 // LookupConverterBinary checks if the wkhtmltopdf executable exits
 func LookupConverterBinary() (string, string, error) {
 	var version string

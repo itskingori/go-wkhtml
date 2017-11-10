@@ -156,6 +156,21 @@ func (fss *FlagSets) GetWidth() (int, bool) {
 	return value.(int), exists
 }
 
+// Generate creates an image based on the parameters passed in
+func Generate(fss *FlagSets, input string, output string) ([]byte, error) {
+	var out []byte
+
+	params := fss.Flags()
+	params = append(params, input, output)
+	cmd := exec.Command(binaryName, params...)
+	out, err := cmd.CombinedOutput()
+	if err != nil {
+		return out, err
+	}
+
+	return out, err
+}
+
 // LookupConverterBinary checks if the wkhtmltoimage executable exits
 func LookupConverterBinary() (string, string, error) {
 	var version string
