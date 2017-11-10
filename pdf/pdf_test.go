@@ -128,7 +128,7 @@ func TestFlagSetFlags(t *testing.T) {
 	fss["margin-top"] = 10
 	fss["page-size"] = "A4"
 
-	expected := []string{"--margin-top=10", "--page-size=A4"}
+	expected := []string{"--margin-top", "10", "--page-size", "A4"}
 	got := fss.Flags()
 
 	sort.Strings(expected)

@@ -128,7 +128,7 @@ func TestFlagSetFlags(t *testing.T) {
 	fss["crop-h"] = 10
 	fss["format"] = "png"
 
-	expected := []string{"--crop-h=10", "--format=png"}
+	expected := []string{"--crop-h", "10", "--format", "png"}
 	got := fss.Flags()
 
 	sort.Strings(expected)

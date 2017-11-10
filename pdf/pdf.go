@@ -101,7 +101,7 @@ func (fss *FlagSets) Flags() []string {
 	var flags []string
 
 	for flagKey, flagValue := range *fss {
-		flags = append(flags, fmt.Sprintf("--%s=%v", flagKey, flagValue))
+		flags = append(flags, fmt.Sprintf("--%s", flagKey), fmt.Sprintf("%v", flagValue))
 	}
 
 	return flags
