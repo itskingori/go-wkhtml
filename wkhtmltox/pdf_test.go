@@ -15,14 +15,14 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with go-wkhtml. If not, see <http://www.gnu.org/licenses/>.
 
-package pdf_test
+package wkhtmltox_test
 
 import (
 	"reflect"
 	"sort"
 	"testing"
 
-	"github.com/itskingori/go-wkhtml/pdf"
+	"github.com/itskingori/go-wkhtml/wkhtmltox"
 )
 
 var pdfInJSON = `
@@ -36,9 +36,9 @@ var pdfInJSON = `
   "page_size": "A4"
 }`
 
-func TestNewOptionsFromJSON(t *testing.T) {
+func TestNewPDFOptionsFromJSON(t *testing.T) {
 	d := []byte(pdfInJSON)
-	p, err := pdf.NewOptionsFromJSON(d)
+	p, err := wkhtmltox.NewPDFOptionsFromJSON(d)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -72,7 +72,7 @@ func TestNewOptionsFromJSON(t *testing.T) {
 	}
 }
 
-func TestOptionsFlags(t *testing.T) {
+func TestPDFOptionsFlags(t *testing.T) {
 	marginTop := 10
 	marginBottom := 10
 	marginLeft := 10
@@ -81,7 +81,7 @@ func TestOptionsFlags(t *testing.T) {
 	pageWidth := 10
 	pageSize := "A4"
 
-	gopts := pdf.GlobalOptions{
+	gopts := wkhtmltox.PDFGlobalOptions{
 		MarginTop:    &marginTop,
 		MarginBottom: &marginBottom,
 		MarginLeft:   &marginLeft,
@@ -91,7 +91,7 @@ func TestOptionsFlags(t *testing.T) {
 		PageSize:     &pageSize,
 	}
 
-	opts := pdf.Options{GlobalOptions: gopts}
+	opts := wkhtmltox.PDFOptions{PDFGlobalOptions: gopts}
 	flags := opts.Flags()
 
 	if flags["margin-top"] != 10 {
@@ -123,8 +123,8 @@ func TestOptionsFlags(t *testing.T) {
 	}
 }
 
-func TestFlagSetFlags(t *testing.T) {
-	fss := make(pdf.FlagSets)
+func TestPDFFlagSetsFlags(t *testing.T) {
+	fss := make(wkhtmltox.PDFFlagSets)
 	fss["margin-top"] = 10
 	fss["page-size"] = "A4"
 
@@ -139,8 +139,8 @@ func TestFlagSetFlags(t *testing.T) {
 	}
 }
 
-func TestGetMarginTop(t *testing.T) {
-	fss := make(pdf.FlagSets)
+func TestPDFFlagSetsGetMarginTop(t *testing.T) {
+	fss := make(wkhtmltox.PDFFlagSets)
 	fss["margin-top"] = 10
 
 	value, exists := fss.GetMarginTop()
@@ -149,8 +149,8 @@ func TestGetMarginTop(t *testing.T) {
 	}
 }
 
-func TestGetMarginBottom(t *testing.T) {
-	fss := make(pdf.FlagSets)
+func TestPDFFlagSetsGetMarginBottom(t *testing.T) {
+	fss := make(wkhtmltox.PDFFlagSets)
 	fss["margin-bottom"] = 10
 
 	value, exists := fss.GetMarginBottom()
@@ -159,8 +159,8 @@ func TestGetMarginBottom(t *testing.T) {
 	}
 }
 
-func TestGetMarginLeft(t *testing.T) {
-	fss := make(pdf.FlagSets)
+func TestPDFFlagSetsGetMarginLeft(t *testing.T) {
+	fss := make(wkhtmltox.PDFFlagSets)
 	fss["margin-left"] = 10
 
 	value, exists := fss.GetMarginLeft()
@@ -169,8 +169,8 @@ func TestGetMarginLeft(t *testing.T) {
 	}
 }
 
-func TestGetMarginRight(t *testing.T) {
-	fss := make(pdf.FlagSets)
+func TestPDFFlagSetsGetMarginRight(t *testing.T) {
+	fss := make(wkhtmltox.PDFFlagSets)
 	fss["margin-right"] = 10
 
 	value, exists := fss.GetMarginRight()
@@ -179,8 +179,8 @@ func TestGetMarginRight(t *testing.T) {
 	}
 }
 
-func TestGetPageHeight(t *testing.T) {
-	fss := make(pdf.FlagSets)
+func TestPDFFlagSetsGetPageHeight(t *testing.T) {
+	fss := make(wkhtmltox.PDFFlagSets)
 	fss["page-height"] = 10
 
 	value, exists := fss.GetPageHeight()
@@ -189,8 +189,8 @@ func TestGetPageHeight(t *testing.T) {
 	}
 }
 
-func TestGetPageWidth(t *testing.T) {
-	fss := make(pdf.FlagSets)
+func TestPDFFlagSetsGetPageWidth(t *testing.T) {
+	fss := make(wkhtmltox.PDFFlagSets)
 	fss["page-width"] = 10
 
 	value, exists := fss.GetPageWidth()
@@ -199,8 +199,8 @@ func TestGetPageWidth(t *testing.T) {
 	}
 }
 
-func TestGetPageSize(t *testing.T) {
-	fss := make(pdf.FlagSets)
+func TestPDFFlagSetsGetPageSize(t *testing.T) {
+	fss := make(wkhtmltox.PDFFlagSets)
 	fss["page-size"] = "A4"
 
 	value, exists := fss.GetPageSize()

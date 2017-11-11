@@ -15,14 +15,14 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with go-wkhtml. If not, see <http://www.gnu.org/licenses/>.
 
-package image_test
+package wkhtmltox_test
 
 import (
 	"reflect"
 	"sort"
 	"testing"
 
-	"github.com/itskingori/go-wkhtml/image"
+	"github.com/itskingori/go-wkhtml/wkhtmltox"
 )
 
 var imageInJSON = `
@@ -36,9 +36,9 @@ var imageInJSON = `
   "width": 10
 }`
 
-func TestNewOptionsFromJSON(t *testing.T) {
+func TestNewImageOptionsFromJSON(t *testing.T) {
 	d := []byte(imageInJSON)
-	i, err := image.NewOptionsFromJSON(d)
+	i, err := wkhtmltox.NewImageOptionsFromJSON(d)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -72,7 +72,7 @@ func TestNewOptionsFromJSON(t *testing.T) {
 	}
 }
 
-func TestOptionsFlags(t *testing.T) {
+func TestImageOptionsFlags(t *testing.T) {
 	cropH := 10
 	cropW := 10
 	cropX := 10
@@ -81,7 +81,7 @@ func TestOptionsFlags(t *testing.T) {
 	height := 10
 	width := 10
 
-	gopts := image.GeneralOptions{
+	gopts := wkhtmltox.ImageGeneralOptions{
 		CropH:  &cropH,
 		CropW:  &cropW,
 		CropX:  &cropX,
@@ -91,7 +91,7 @@ func TestOptionsFlags(t *testing.T) {
 		Width:  &width,
 	}
 
-	opts := image.Options{GeneralOptions: gopts}
+	opts := wkhtmltox.ImageOptions{ImageGeneralOptions: gopts}
 	flags := opts.Flags()
 
 	if flags["crop-h"] != 10 {
@@ -123,8 +123,8 @@ func TestOptionsFlags(t *testing.T) {
 	}
 }
 
-func TestFlagSetFlags(t *testing.T) {
-	fss := make(image.FlagSets)
+func TestImageFlagSetsFlags(t *testing.T) {
+	fss := make(wkhtmltox.ImageFlagSets)
 	fss["crop-h"] = 10
 	fss["format"] = "png"
 
@@ -139,8 +139,8 @@ func TestFlagSetFlags(t *testing.T) {
 	}
 }
 
-func TestGetCropH(t *testing.T) {
-	fss := make(image.FlagSets)
+func TestImageFlagSetsGetCropH(t *testing.T) {
+	fss := make(wkhtmltox.ImageFlagSets)
 	fss["crop-h"] = 10
 
 	value, exists := fss.GetCropH()
@@ -149,8 +149,8 @@ func TestGetCropH(t *testing.T) {
 	}
 }
 
-func TestGetCropW(t *testing.T) {
-	fss := make(image.FlagSets)
+func TestImageFlagSetsGetCropW(t *testing.T) {
+	fss := make(wkhtmltox.ImageFlagSets)
 	fss["crop-w"] = 10
 
 	value, exists := fss.GetCropW()
@@ -159,8 +159,8 @@ func TestGetCropW(t *testing.T) {
 	}
 }
 
-func TestGetCropX(t *testing.T) {
-	fss := make(image.FlagSets)
+func TestImageFlagSetsGetCropX(t *testing.T) {
+	fss := make(wkhtmltox.ImageFlagSets)
 	fss["crop-x"] = 10
 
 	value, exists := fss.GetCropX()
@@ -169,8 +169,8 @@ func TestGetCropX(t *testing.T) {
 	}
 }
 
-func TestGetCropY(t *testing.T) {
-	fss := make(image.FlagSets)
+func TestImageFlagSetsGetCropY(t *testing.T) {
+	fss := make(wkhtmltox.ImageFlagSets)
 	fss["crop-y"] = 10
 
 	value, exists := fss.GetCropY()
@@ -179,8 +179,8 @@ func TestGetCropY(t *testing.T) {
 	}
 }
 
-func TestGetFormat(t *testing.T) {
-	fss := make(image.FlagSets)
+func TestImageFlagSetsGetFormat(t *testing.T) {
+	fss := make(wkhtmltox.ImageFlagSets)
 	fss["format"] = "png"
 
 	value, exists := fss.GetFormat()
@@ -189,8 +189,8 @@ func TestGetFormat(t *testing.T) {
 	}
 }
 
-func TestGetHeight(t *testing.T) {
-	fss := make(image.FlagSets)
+func TestImageFlagSetsGetHeight(t *testing.T) {
+	fss := make(wkhtmltox.ImageFlagSets)
 	fss["height"] = 10
 
 	value, exists := fss.GetHeight()
@@ -199,8 +199,8 @@ func TestGetHeight(t *testing.T) {
 	}
 }
 
-func TestGetWidth(t *testing.T) {
-	fss := make(image.FlagSets)
+func TestImageFlagSetsGetWidth(t *testing.T) {
+	fss := make(wkhtmltox.ImageFlagSets)
 	fss["width"] = 10
 
 	value, exists := fss.GetWidth()
