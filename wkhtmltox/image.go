@@ -28,8 +28,8 @@ const (
 	imageConverterBinary = "wkhtmltoimage"
 )
 
-// ImageFlagSets are key-value pair of flags
-type ImageFlagSets map[string]interface{}
+// ImageFlagSets are key-value pair of image converter flags
+type ImageFlagSets FlagSets
 
 // ImageOptions represents a wkhtmlimage attributes
 type ImageOptions struct {

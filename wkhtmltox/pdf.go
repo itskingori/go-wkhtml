@@ -28,8 +28,8 @@ const (
 	pdfConverterBinary = "wkhtmltopdf"
 )
 
-// PDFFlagSets are key-value pair of flags
-type PDFFlagSets map[string]interface{}
+// PDFFlagSets are key-value pair of PDF converter flags
+type PDFFlagSets FlagSets
 
 // PDFOptions represents a wkhtmlpdf attributes
 type PDFOptions struct {
