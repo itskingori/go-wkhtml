@@ -36,39 +36,39 @@ var imageInJSON = `
   "width": 10
 }`
 
-func TestNewImageOptionsFromJSON(t *testing.T) {
+func TestNewFlagSetFromJSON(t *testing.T) {
 	d := []byte(imageInJSON)
-	i, err := wkhtmltox.NewImageOptionsFromJSON(d)
+	ifs, err := wkhtmltox.NewFlagSetFromJSON(d)
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	if *i.CropH != 10 {
-		t.Fatalf("expected %s to be %d, got %d", "CropH", 10, *i.CropH)
+	if v, _ := ifs.GetCropH(); v != 10 {
+		t.Fatalf("expected %s to be %d, got %d", "CropH", 10, v)
 	}
 
-	if *i.CropW != 10 {
-		t.Fatalf("expected %s to be %d, got %d", "CropW", 10, *i.CropW)
+	if v, _ := ifs.GetCropW(); v != 10 {
+		t.Fatalf("expected %s to be %d, got %d", "CropW", 10, v)
 	}
 
-	if *i.CropX != 10 {
-		t.Fatalf("expected %s to be %d, got %d", "CropX", 10, *i.CropX)
+	if v, _ := ifs.GetCropX(); v != 10 {
+		t.Fatalf("expected %s to be %d, got %d", "CropX", 10, v)
 	}
 
-	if *i.CropY != 10 {
-		t.Fatalf("expected %s to be %d, got %d", "CropY", 10, *i.CropY)
+	if v, _ := ifs.GetCropY(); v != 10 {
+		t.Fatalf("expected %s to be %d, got %d", "CropY", 10, v)
 	}
 
-	if *i.Format != "png" {
-		t.Fatalf("expected %s to be %s, got %s", "Format", "png", *i.Format)
+	if v, _ := ifs.GetFormat(); v != "png" {
+		t.Fatalf("expected %s to be %s, got %s", "Format", "png", v)
 	}
 
-	if *i.Height != 10 {
-		t.Fatalf("expected %s to be %d, got %d", "Height", 10, *i.Height)
+	if v, _ := ifs.GetHeight(); v != 10 {
+		t.Fatalf("expected %s to be %d, got %d", "Height", 10, v)
 	}
 
-	if *i.Width != 10 {
-		t.Fatalf("expected %s to be %d, got %d", "Width", 10, *i.Width)
+	if v, _ := ifs.GetWidth(); v != 10 {
+		t.Fatalf("expected %s to be %d, got %d", "Width", 10, v)
 	}
 }
 

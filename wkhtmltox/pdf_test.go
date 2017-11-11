@@ -36,39 +36,39 @@ var pdfInJSON = `
   "page_size": "A4"
 }`
 
-func TestNewPDFOptionsFromJSON(t *testing.T) {
+func TestNewPDFFlagSetFromJSON(t *testing.T) {
 	d := []byte(pdfInJSON)
-	p, err := wkhtmltox.NewPDFOptionsFromJSON(d)
+	pfs, err := wkhtmltox.NewPDFFlagSetFromJSON(d)
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	if *p.MarginTop != 10 {
-		t.Fatalf("expected %s to be %d, got %d", "MarginTop", 10, *p.MarginTop)
+	if v, _ := pfs.GetMarginTop(); v != 10 {
+		t.Fatalf("expected %s to be %d, got %d", "MarginTop", 10, v)
 	}
 
-	if *p.MarginBottom != 10 {
-		t.Fatalf("expected %s to be %d, got %d", "MarginBottom", 10, *p.MarginBottom)
+	if v, _ := pfs.GetMarginBottom(); v != 10 {
+		t.Fatalf("expected %s to be %d, got %d", "MarginBottom", 10, v)
 	}
 
-	if *p.MarginLeft != 10 {
-		t.Fatalf("expected %s to be %d, got %d", "MarginLeft", 10, *p.MarginLeft)
+	if v, _ := pfs.GetMarginLeft(); v != 10 {
+		t.Fatalf("expected %s to be %d, got %d", "MarginLeft", 10, v)
 	}
 
-	if *p.MarginRight != 10 {
-		t.Fatalf("expected %s to be %d, got %d", "MarginRight", 10, *p.MarginRight)
+	if v, _ := pfs.GetMarginRight(); v != 10 {
+		t.Fatalf("expected %s to be %d, got %d", "MarginRight", 10, v)
 	}
 
-	if *p.PageHeight != 10 {
-		t.Fatalf("expected %s to be %d, got %d", "PageHeight", 10, *p.PageHeight)
+	if v, _ := pfs.GetPageHeight(); v != 10 {
+		t.Fatalf("expected %s to be %d, got %d", "PageHeight", 10, v)
 	}
 
-	if *p.PageWidth != 10 {
-		t.Fatalf("expected %s to be %d, got %d", "PageWidth", 10, *p.PageWidth)
+	if v, _ := pfs.GetPageWidth(); v != 10 {
+		t.Fatalf("expected %s to be %d, got %d", "PageWidth", 10, v)
 	}
 
-	if *p.PageSize != "A4" {
-		t.Fatalf("expected %s to be %s, got %s", "PageSize", "A4", *p.PageSize)
+	if v, _ := pfs.GetPageSize(); v != "A4" {
+		t.Fatalf("expected %s to be %s, got %s", "PageSize", "A4", v)
 	}
 }
 

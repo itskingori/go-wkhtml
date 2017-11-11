@@ -43,16 +43,17 @@ type PDFOptions struct {
 	PageSize     *string `json:"page_size,omitempty"`     // Size of the page
 }
 
-// NewPDFOptionsFromJSON create pdf options from JSON
-func NewPDFOptionsFromJSON(data []byte) (*PDFOptions, error) {
+// NewPDFFlagSetFromJSON create pdf options from JSON
+func NewPDFFlagSetFromJSON(data []byte) (PDFFlagSets, error) {
 	opts := &PDFOptions{}
 
 	err := json.Unmarshal(data, &opts)
+	pfs := opts.convertToFlagSet()
 	if err != nil {
-		return opts, err
+		return pfs, err
 	}
 
-	return opts, nil
+	return pfs, nil
 }
 
 func (opts *PDFOptions) convertToFlagSet() PDFFlagSets {
