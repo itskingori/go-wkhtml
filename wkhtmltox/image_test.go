@@ -36,9 +36,9 @@ var imageInJSON = `
   "width": 10
 }`
 
-func TestNewFlagSetFromJSON(t *testing.T) {
+func TestNewImageFlagSetFromJSON(t *testing.T) {
 	d := []byte(imageInJSON)
-	ifs, err := wkhtmltox.NewFlagSetFromJSON(d)
+	ifs, err := wkhtmltox.NewImageFlagSetFromJSON(d)
 	if err != nil {
 		t.Fatal(err)
 	}

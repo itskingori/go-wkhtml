@@ -43,8 +43,8 @@ type ImageOptions struct {
 	Width  *int    `json:"width,omitempty"`  // Set screen width
 }
 
-// NewFlagSetFromJSON create image options from JSON
-func NewFlagSetFromJSON(data []byte) (ImageFlagSet, error) {
+// NewImageFlagSetFromJSON create image options from JSON
+func NewImageFlagSetFromJSON(data []byte) (ImageFlagSet, error) {
 	opts := &ImageOptions{}
 
 	err := json.Unmarshal(data, &opts)
