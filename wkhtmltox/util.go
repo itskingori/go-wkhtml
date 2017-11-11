@@ -24,7 +24,7 @@ import (
 )
 
 // LookupConverter checks if converter executable exists and returns
-// the path and version.
+// it's path and version.
 func LookupConverter(name string) (string, string, error) {
 	var version string
 

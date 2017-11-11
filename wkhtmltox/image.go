@@ -26,10 +26,10 @@ const (
 	imageConverterBinary = "wkhtmltoimage"
 )
 
-// ImageFlagSet are key-value pair of image converter flags
+// ImageFlagSet represents key-value pairs of image converter flags
 type ImageFlagSet FlagSet
 
-// ImageOptions represents a wkhtmlimage attributes
+// ImageOptions represents wkhtmlimage attributes
 type ImageOptions struct {
 	// General
 	CropH  *int    `json:"crop_h,omitempty"` // Set height for cropping
@@ -76,7 +76,7 @@ func (opts *ImageOptions) FlagSet() ImageFlagSet {
 	return ifs
 }
 
-// Flags converts a FlagSet to a String slice
+// Flags generates a String slice from a ImageFlagSet
 func (ifs *ImageFlagSet) Flags() []string {
 	var flags []string
 
@@ -87,56 +87,56 @@ func (ifs *ImageFlagSet) Flags() []string {
 	return flags
 }
 
-// GetCropH retrieves the CropH from ImageFlagSet
+// GetCropH retrieves the CropH from a ImageFlagSet
 func (ifs *ImageFlagSet) GetCropH() (int, bool) {
 	value, exists := (*ifs)["crop-h"]
 
 	return value.(int), exists
 }
 
-// GetCropW retrieves the CropW from ImageFlagSet
+// GetCropW retrieves the CropW from a ImageFlagSet
 func (ifs *ImageFlagSet) GetCropW() (int, bool) {
 	value, exists := (*ifs)["crop-w"]
 
 	return value.(int), exists
 }
 
-// GetCropX retrieves the CropX from ImageFlagSet
+// GetCropX retrieves the CropX from a ImageFlagSet
 func (ifs *ImageFlagSet) GetCropX() (int, bool) {
 	value, exists := (*ifs)["crop-x"]
 
 	return value.(int), exists
 }
 
-// GetCropY retrieves the CropY from ImageFlagSet
+// GetCropY retrieves the CropY from a ImageFlagSet
 func (ifs *ImageFlagSet) GetCropY() (int, bool) {
 	value, exists := (*ifs)["crop-y"]
 
 	return value.(int), exists
 }
 
-// GetFormat retrieves the Format from ImageFlagSet
+// GetFormat retrieves the Format from a ImageFlagSet
 func (ifs *ImageFlagSet) GetFormat() (string, bool) {
 	value, exists := (*ifs)["format"]
 
 	return value.(string), exists
 }
 
-// GetHeight retrieves the Height from ImageFlagSet
+// GetHeight retrieves the Height from a ImageFlagSet
 func (ifs *ImageFlagSet) GetHeight() (int, bool) {
 	value, exists := (*ifs)["height"]
 
 	return value.(int), exists
 }
 
-// GetWidth retrieves the Width from ImageFlagSet
+// GetWidth retrieves the Width from a ImageFlagSet
 func (ifs *ImageFlagSet) GetWidth() (int, bool) {
 	value, exists := (*ifs)["width"]
 
 	return value.(int), exists
 }
 
-// Generate creates an image based on the parameters passed in
+// Generate performs the image conversion and saves the file to disk
 func (ifs *ImageFlagSet) Generate(inputURL string, outputFile string) ([]byte, error) {
 	var out []byte
 

@@ -17,5 +17,5 @@
 
 package wkhtmltox
 
-// FlagSet are key-value pair of flags
+// FlagSet represents key-value pair of flags
 type FlagSet map[string]interface{}
