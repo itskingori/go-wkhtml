@@ -23,9 +23,9 @@ import (
 	"os/exec"
 )
 
-// LookupConverterExecutable checks if converter executable exists and returns
+// LookupConverter checks if converter executable exists and returns
 // the path and version.
-func LookupConverterExecutable(name string) (string, string, error) {
+func LookupConverter(name string) (string, string, error) {
 	var version string
 
 	path, err := exec.LookPath(name)
