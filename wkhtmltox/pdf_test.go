@@ -25,53 +25,6 @@ import (
 	"github.com/itskingori/go-wkhtml/wkhtmltox"
 )
 
-var pdfInJSON = `
-{
-  "margin_top": 10,
-  "margin_bottom": 10,
-  "margin_left": 10,
-  "margin_right": 10,
-  "page_height": 10,
-  "page_width": 10,
-  "page_size": "A4"
-}`
-
-func TestNewPDFFlagSetFromJSON(t *testing.T) {
-	d := []byte(pdfInJSON)
-	pfs, err := wkhtmltox.NewPDFFlagSetFromJSON(d)
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	if v, _ := pfs.GetMarginTop(); v != 10 {
-		t.Fatalf("expected %s to be %d, got %d", "MarginTop", 10, v)
-	}
-
-	if v, _ := pfs.GetMarginBottom(); v != 10 {
-		t.Fatalf("expected %s to be %d, got %d", "MarginBottom", 10, v)
-	}
-
-	if v, _ := pfs.GetMarginLeft(); v != 10 {
-		t.Fatalf("expected %s to be %d, got %d", "MarginLeft", 10, v)
-	}
-
-	if v, _ := pfs.GetMarginRight(); v != 10 {
-		t.Fatalf("expected %s to be %d, got %d", "MarginRight", 10, v)
-	}
-
-	if v, _ := pfs.GetPageHeight(); v != 10 {
-		t.Fatalf("expected %s to be %d, got %d", "PageHeight", 10, v)
-	}
-
-	if v, _ := pfs.GetPageWidth(); v != 10 {
-		t.Fatalf("expected %s to be %d, got %d", "PageWidth", 10, v)
-	}
-
-	if v, _ := pfs.GetPageSize(); v != "A4" {
-		t.Fatalf("expected %s to be %s, got %s", "PageSize", "A4", v)
-	}
-}
-
 func TestPDFOptionsFlagSet(t *testing.T) {
 	marginTop := 10
 	marginBottom := 10

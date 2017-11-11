@@ -19,8 +19,6 @@ package wkhtmltox
 
 import (
 	"fmt"
-
-	"encoding/json"
 	"os/exec"
 )
 
@@ -41,19 +39,6 @@ type ImageOptions struct {
 	Format *string `json:"format,omitempty"` // Output file format
 	Height *int    `json:"height,omitempty"` // Set screen height
 	Width  *int    `json:"width,omitempty"`  // Set screen width
-}
-
-// NewImageFlagSetFromJSON create image options from JSON
-func NewImageFlagSetFromJSON(data []byte) (ImageFlagSet, error) {
-	opts := &ImageOptions{}
-
-	err := json.Unmarshal(data, &opts)
-	ifs := opts.FlagSet()
-	if err != nil {
-		return ifs, err
-	}
-
-	return ifs, nil
 }
 
 // FlagSet generates a FlagSet from ImageOptions

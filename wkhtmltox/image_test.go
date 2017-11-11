@@ -25,53 +25,6 @@ import (
 	"github.com/itskingori/go-wkhtml/wkhtmltox"
 )
 
-var imageInJSON = `
-{
-  "crop_h": 10,
-  "crop_w": 10,
-  "crop_x": 10,
-  "crop_y": 10,
-  "format": "png",
-  "height": 10,
-  "width": 10
-}`
-
-func TestNewImageFlagSetFromJSON(t *testing.T) {
-	d := []byte(imageInJSON)
-	ifs, err := wkhtmltox.NewImageFlagSetFromJSON(d)
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	if v, _ := ifs.GetCropH(); v != 10 {
-		t.Fatalf("expected %s to be %d, got %d", "CropH", 10, v)
-	}
-
-	if v, _ := ifs.GetCropW(); v != 10 {
-		t.Fatalf("expected %s to be %d, got %d", "CropW", 10, v)
-	}
-
-	if v, _ := ifs.GetCropX(); v != 10 {
-		t.Fatalf("expected %s to be %d, got %d", "CropX", 10, v)
-	}
-
-	if v, _ := ifs.GetCropY(); v != 10 {
-		t.Fatalf("expected %s to be %d, got %d", "CropY", 10, v)
-	}
-
-	if v, _ := ifs.GetFormat(); v != "png" {
-		t.Fatalf("expected %s to be %s, got %s", "Format", "png", v)
-	}
-
-	if v, _ := ifs.GetHeight(); v != 10 {
-		t.Fatalf("expected %s to be %d, got %d", "Height", 10, v)
-	}
-
-	if v, _ := ifs.GetWidth(); v != 10 {
-		t.Fatalf("expected %s to be %d, got %d", "Width", 10, v)
-	}
-}
-
 func TestImageOptionsFlagSet(t *testing.T) {
 	cropH := 10
 	cropW := 10

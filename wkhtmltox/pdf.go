@@ -19,8 +19,6 @@ package wkhtmltox
 
 import (
 	"fmt"
-
-	"encoding/json"
 	"os/exec"
 )
 
@@ -41,19 +39,6 @@ type PDFOptions struct {
 	PageHeight   *int    `json:"page_height,omitempty"`   // Height of the page
 	PageWidth    *int    `json:"page_width,omitempty"`    // Width of the page
 	PageSize     *string `json:"page_size,omitempty"`     // Size of the page
-}
-
-// NewPDFFlagSetFromJSON create pdf options from JSON
-func NewPDFFlagSetFromJSON(data []byte) (PDFFlagSet, error) {
-	opts := &PDFOptions{}
-
-	err := json.Unmarshal(data, &opts)
-	pfs := opts.FlagSet()
-	if err != nil {
-		return pfs, err
-	}
-
-	return pfs, nil
 }
 
 // FlagSet generates a FlagSet from PDFOptions
