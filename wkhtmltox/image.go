@@ -150,8 +150,8 @@ func (ifs *ImageFlagSets) GetWidth() (int, bool) {
 	return value.(int), exists
 }
 
-// GenerateImage creates an image based on the parameters passed in
-func GenerateImage(ifs *ImageFlagSets, inputURL string, outputFile string) ([]byte, error) {
+// Generate creates an image based on the parameters passed in
+func (ifs *ImageFlagSets) Generate(inputURL string, outputFile string) ([]byte, error) {
 	var out []byte
 
 	params := ifs.Flags()

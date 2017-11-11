@@ -150,8 +150,8 @@ func (pfs *PDFFlagSets) GetPageSize() (string, bool) {
 	return value.(string), exists
 }
 
-// GeneratePDF creates an pdf based on the parameters passed in
-func GeneratePDF(pfs *PDFFlagSets, inputURL string, outputFile string) ([]byte, error) {
+// Generate creates an pdf based on the parameters passed in
+func (pfs *PDFFlagSets) Generate(inputURL string, outputFile string) ([]byte, error) {
 	var out []byte
 
 	params := pfs.Flags()
