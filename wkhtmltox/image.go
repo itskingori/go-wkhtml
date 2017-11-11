@@ -48,7 +48,7 @@ func NewImageFlagSetFromJSON(data []byte) (ImageFlagSet, error) {
 	opts := &ImageOptions{}
 
 	err := json.Unmarshal(data, &opts)
-	ifs := opts.convertToFlagSet()
+	ifs := opts.FlagSet()
 	if err != nil {
 		return ifs, err
 	}
@@ -56,7 +56,8 @@ func NewImageFlagSetFromJSON(data []byte) (ImageFlagSet, error) {
 	return ifs, nil
 }
 
-func (opts *ImageOptions) convertToFlagSet() ImageFlagSet {
+// FlagSet generates a FlagSet from ImageOptions
+func (opts *ImageOptions) FlagSet() ImageFlagSet {
 	ifs := make(ImageFlagSet)
 
 	if opts.CropH != nil {

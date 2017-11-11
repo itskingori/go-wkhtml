@@ -48,7 +48,7 @@ func NewPDFFlagSetFromJSON(data []byte) (PDFFlagSet, error) {
 	opts := &PDFOptions{}
 
 	err := json.Unmarshal(data, &opts)
-	pfs := opts.convertToFlagSet()
+	pfs := opts.FlagSet()
 	if err != nil {
 		return pfs, err
 	}
@@ -56,7 +56,8 @@ func NewPDFFlagSetFromJSON(data []byte) (PDFFlagSet, error) {
 	return pfs, nil
 }
 
-func (opts *PDFOptions) convertToFlagSet() PDFFlagSet {
+// FlagSet generates a FlagSet from PDFOptions
+func (opts *PDFOptions) FlagSet() PDFFlagSet {
 	pfs := make(PDFFlagSet)
 
 	if opts.MarginTop != nil {
