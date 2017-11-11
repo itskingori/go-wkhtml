@@ -142,7 +142,7 @@ func TestPDFFlagSetsGetMarginTop(t *testing.T) {
 	fss["margin-top"] = 10
 
 	value, exists := fss.GetMarginTop()
-	if exists != true || value != 10 {
+	if !exists || value != 10 {
 		t.Fatalf("expected %s to be %d, got %d", "margin-top", fss["margin-top"], value)
 	}
 }
@@ -152,7 +152,7 @@ func TestPDFFlagSetsGetMarginBottom(t *testing.T) {
 	fss["margin-bottom"] = 10
 
 	value, exists := fss.GetMarginBottom()
-	if exists != true || value != 10 {
+	if !exists || value != 10 {
 		t.Fatalf("expected %s to be %d, got %d", "margin-bottom", fss["margin-bottom"], value)
 	}
 }
@@ -162,7 +162,7 @@ func TestPDFFlagSetsGetMarginLeft(t *testing.T) {
 	fss["margin-left"] = 10
 
 	value, exists := fss.GetMarginLeft()
-	if exists != true || value != 10 {
+	if !exists || value != 10 {
 		t.Fatalf("expected %s to be %d, got %d", "margin-left", fss["margin-left"], value)
 	}
 }
@@ -172,7 +172,7 @@ func TestPDFFlagSetsGetMarginRight(t *testing.T) {
 	fss["margin-right"] = 10
 
 	value, exists := fss.GetMarginRight()
-	if exists != true || value != 10 {
+	if !exists || value != 10 {
 		t.Fatalf("expected %s to be %d, got %d", "margin-right", fss["margin-right"], value)
 	}
 }
@@ -182,7 +182,7 @@ func TestPDFFlagSetsGetPageHeight(t *testing.T) {
 	fss["page-height"] = 10
 
 	value, exists := fss.GetPageHeight()
-	if exists != true || value != 10 {
+	if !exists || value != 10 {
 		t.Fatalf("expected %s to be %d, got %d", "page-height", fss["page-height"], value)
 	}
 }
@@ -192,7 +192,7 @@ func TestPDFFlagSetsGetPageWidth(t *testing.T) {
 	fss["page-width"] = 10
 
 	value, exists := fss.GetPageWidth()
-	if exists != true || value != 10 {
+	if !exists || value != 10 {
 		t.Fatalf("expected %s to be %d, got %d", "page-width", fss["page-width"], value)
 	}
 }
@@ -202,7 +202,7 @@ func TestPDFFlagSetsGetPageSize(t *testing.T) {
 	fss["page-size"] = "A4"
 
 	value, exists := fss.GetPageSize()
-	if exists != true || value != "A4" {
+	if !exists || value != "A4" {
 		t.Fatalf("expected %s to be %s, got %s", "page-size", fss["page-size"], value)
 	}
 }
