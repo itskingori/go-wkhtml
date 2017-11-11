@@ -55,8 +55,7 @@ func NewPDFOptionsFromJSON(data []byte) (*PDFOptions, error) {
 	return opts, nil
 }
 
-// Flags generates flag key-value-map pairs from PDFOptions
-func (opts *PDFOptions) Flags() PDFFlagSets {
+func (opts *PDFOptions) convertToFlagSet() PDFFlagSets {
 	pfs := make(PDFFlagSets)
 
 	if opts.MarginTop != nil {

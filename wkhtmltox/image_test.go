@@ -72,55 +72,6 @@ func TestNewImageOptionsFromJSON(t *testing.T) {
 	}
 }
 
-func TestImageOptionsFlags(t *testing.T) {
-	cropH := 10
-	cropW := 10
-	cropX := 10
-	cropY := 10
-	format := "png"
-	height := 10
-	width := 10
-
-	opts := wkhtmltox.ImageOptions{
-		CropH:  &cropH,
-		CropW:  &cropW,
-		CropX:  &cropX,
-		CropY:  &cropY,
-		Format: &format,
-		Height: &height,
-		Width:  &width,
-	}
-	flags := opts.Flags()
-
-	if flags["crop-h"] != 10 {
-		t.Fatalf("expected %s to be %d, got %d", "crop-h", 10, flags["crop-h"])
-	}
-
-	if flags["crop-w"] != 10 {
-		t.Fatalf("expected %s to be %d, got %d", "crop-w", 10, flags["crop-w"])
-	}
-
-	if flags["crop-x"] != 10 {
-		t.Fatalf("expected %s to be %d, got %d", "crop-x", 10, flags["crop-x"])
-	}
-
-	if flags["crop-y"] != 10 {
-		t.Fatalf("expected %s to be %d, got %d", "crop-y", 10, flags["crop-y"])
-	}
-
-	if flags["format"] != "png" {
-		t.Fatalf("expected %s to be %s, got %s", "format", "png", flags["format"])
-	}
-
-	if flags["height"] != 10 {
-		t.Fatalf("expected %s to be %d, got %d", "height", 10, flags["height"])
-	}
-
-	if flags["width"] != 10 {
-		t.Fatalf("expected %s to be %d, got %d", "width", 10, flags["width"])
-	}
-}
-
 func TestImageFlagSetsFlags(t *testing.T) {
 	fss := make(wkhtmltox.ImageFlagSets)
 	fss["crop-h"] = 10

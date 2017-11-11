@@ -55,8 +55,7 @@ func NewImageOptionsFromJSON(data []byte) (*ImageOptions, error) {
 	return opts, nil
 }
 
-// Flags generates flag key-value-map pairs from ImageOptions
-func (opts *ImageOptions) Flags() ImageFlagSets {
+func (opts *ImageOptions) convertToFlagSet() ImageFlagSets {
 	ifs := make(ImageFlagSets)
 
 	if opts.CropH != nil {
