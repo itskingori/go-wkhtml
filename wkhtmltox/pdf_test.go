@@ -43,34 +43,34 @@ func TestPDFOptionsFlagSet(t *testing.T) {
 		PageWidth:    &pageWidth,
 		PageSize:     &pageSize,
 	}
-	flags := opts.FlagSet()
+	pfs := opts.FlagSet()
 
-	if flags["margin-top"] != 10 {
-		t.Fatalf("expected %s to be %d, got %d", "crop-h", 10, flags["margin-top"])
+	if pfs["margin-top"] != 10 {
+		t.Fatalf("expected %s to be %d, got %d", "crop-h", 10, pfs["margin-top"])
 	}
 
-	if flags["margin-bottom"] != 10 {
-		t.Fatalf("expected %s to be %d, got %d", "crop-w", 10, flags["margin-bottom"])
+	if pfs["margin-bottom"] != 10 {
+		t.Fatalf("expected %s to be %d, got %d", "crop-w", 10, pfs["margin-bottom"])
 	}
 
-	if flags["margin-left"] != 10 {
-		t.Fatalf("expected %s to be %d, got %d", "crop-x", 10, flags["margin-left"])
+	if pfs["margin-left"] != 10 {
+		t.Fatalf("expected %s to be %d, got %d", "crop-x", 10, pfs["margin-left"])
 	}
 
-	if flags["margin-right"] != 10 {
-		t.Fatalf("expected %s to be %d, got %d", "crop-y", 10, flags["margin-right"])
+	if pfs["margin-right"] != 10 {
+		t.Fatalf("expected %s to be %d, got %d", "crop-y", 10, pfs["margin-right"])
 	}
 
-	if flags["page-height"] != 10 {
-		t.Fatalf("expected %s to be %d, got %d", "format", 10, flags["page-height"])
+	if pfs["page-height"] != 10 {
+		t.Fatalf("expected %s to be %d, got %d", "format", 10, pfs["page-height"])
 	}
 
-	if flags["page-width"] != 10 {
-		t.Fatalf("expected %s to be %d, got %d", "height", 10, flags["page-width"])
+	if pfs["page-width"] != 10 {
+		t.Fatalf("expected %s to be %d, got %d", "height", 10, pfs["page-width"])
 	}
 
-	if flags["page-size"] != "A4" {
-		t.Fatalf("expected %s to be %s, got %s", "width", "A4", flags["page-size"])
+	if pfs["page-size"] != "A4" {
+		t.Fatalf("expected %s to be %s, got %s", "width", "A4", pfs["page-size"])
 	}
 }
 
