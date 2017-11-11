@@ -1,5 +1,7 @@
 # go-wkhtml
 
+[![GoDoc](https://godoc.org/github.com/itskingori/go-wkhtml?status.svg)](https://godoc.org/github.com/itskingori/go-wkhtml)
+
 Golang wrapper for `wkhtmltoimage` and `wkhtmltopdf`.
 
 ## Development
