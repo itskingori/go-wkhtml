@@ -72,8 +72,8 @@ func TestNewPDFFlagSetFromJSON(t *testing.T) {
 	}
 }
 
-func TestPDFFlagSetsFlags(t *testing.T) {
-	fss := make(wkhtmltox.PDFFlagSets)
+func TestPDFFlagSetFlags(t *testing.T) {
+	fss := make(wkhtmltox.PDFFlagSet)
 	fss["margin-top"] = 10
 	fss["page-size"] = "A4"
 
@@ -88,8 +88,8 @@ func TestPDFFlagSetsFlags(t *testing.T) {
 	}
 }
 
-func TestPDFFlagSetsGetMarginTop(t *testing.T) {
-	fss := make(wkhtmltox.PDFFlagSets)
+func TestPDFFlagSetGetMarginTop(t *testing.T) {
+	fss := make(wkhtmltox.PDFFlagSet)
 	fss["margin-top"] = 10
 
 	value, exists := fss.GetMarginTop()
@@ -98,8 +98,8 @@ func TestPDFFlagSetsGetMarginTop(t *testing.T) {
 	}
 }
 
-func TestPDFFlagSetsGetMarginBottom(t *testing.T) {
-	fss := make(wkhtmltox.PDFFlagSets)
+func TestPDFFlagSetGetMarginBottom(t *testing.T) {
+	fss := make(wkhtmltox.PDFFlagSet)
 	fss["margin-bottom"] = 10
 
 	value, exists := fss.GetMarginBottom()
@@ -108,8 +108,8 @@ func TestPDFFlagSetsGetMarginBottom(t *testing.T) {
 	}
 }
 
-func TestPDFFlagSetsGetMarginLeft(t *testing.T) {
-	fss := make(wkhtmltox.PDFFlagSets)
+func TestPDFFlagSetGetMarginLeft(t *testing.T) {
+	fss := make(wkhtmltox.PDFFlagSet)
 	fss["margin-left"] = 10
 
 	value, exists := fss.GetMarginLeft()
@@ -118,8 +118,8 @@ func TestPDFFlagSetsGetMarginLeft(t *testing.T) {
 	}
 }
 
-func TestPDFFlagSetsGetMarginRight(t *testing.T) {
-	fss := make(wkhtmltox.PDFFlagSets)
+func TestPDFFlagSetGetMarginRight(t *testing.T) {
+	fss := make(wkhtmltox.PDFFlagSet)
 	fss["margin-right"] = 10
 
 	value, exists := fss.GetMarginRight()
@@ -128,8 +128,8 @@ func TestPDFFlagSetsGetMarginRight(t *testing.T) {
 	}
 }
 
-func TestPDFFlagSetsGetPageHeight(t *testing.T) {
-	fss := make(wkhtmltox.PDFFlagSets)
+func TestPDFFlagSetGetPageHeight(t *testing.T) {
+	fss := make(wkhtmltox.PDFFlagSet)
 	fss["page-height"] = 10
 
 	value, exists := fss.GetPageHeight()
@@ -138,8 +138,8 @@ func TestPDFFlagSetsGetPageHeight(t *testing.T) {
 	}
 }
 
-func TestPDFFlagSetsGetPageWidth(t *testing.T) {
-	fss := make(wkhtmltox.PDFFlagSets)
+func TestPDFFlagSetGetPageWidth(t *testing.T) {
+	fss := make(wkhtmltox.PDFFlagSet)
 	fss["page-width"] = 10
 
 	value, exists := fss.GetPageWidth()
@@ -148,8 +148,8 @@ func TestPDFFlagSetsGetPageWidth(t *testing.T) {
 	}
 }
 
-func TestPDFFlagSetsGetPageSize(t *testing.T) {
-	fss := make(wkhtmltox.PDFFlagSets)
+func TestPDFFlagSetGetPageSize(t *testing.T) {
+	fss := make(wkhtmltox.PDFFlagSet)
 	fss["page-size"] = "A4"
 
 	value, exists := fss.GetPageSize()

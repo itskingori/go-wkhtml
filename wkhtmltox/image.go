@@ -28,8 +28,8 @@ const (
 	imageConverterBinary = "wkhtmltoimage"
 )
 
-// ImageFlagSets are key-value pair of image converter flags
-type ImageFlagSets FlagSets
+// ImageFlagSet are key-value pair of image converter flags
+type ImageFlagSet FlagSet
 
 // ImageOptions represents a wkhtmlimage attributes
 type ImageOptions struct {
@@ -44,7 +44,7 @@ type ImageOptions struct {
 }
 
 // NewFlagSetFromJSON create image options from JSON
-func NewFlagSetFromJSON(data []byte) (ImageFlagSets, error) {
+func NewFlagSetFromJSON(data []byte) (ImageFlagSet, error) {
 	opts := &ImageOptions{}
 
 	err := json.Unmarshal(data, &opts)
@@ -56,8 +56,8 @@ func NewFlagSetFromJSON(data []byte) (ImageFlagSets, error) {
 	return ifs, nil
 }
 
-func (opts *ImageOptions) convertToFlagSet() ImageFlagSets {
-	ifs := make(ImageFlagSets)
+func (opts *ImageOptions) convertToFlagSet() ImageFlagSet {
+	ifs := make(ImageFlagSet)
 
 	if opts.CropH != nil {
 		ifs["crop-h"] = *opts.CropH
@@ -91,7 +91,7 @@ func (opts *ImageOptions) convertToFlagSet() ImageFlagSets {
 }
 
 // Flags converts a FlagSet to a String slice
-func (ifs *ImageFlagSets) Flags() []string {
+func (ifs *ImageFlagSet) Flags() []string {
 	var flags []string
 
 	for flagKey, flagValue := range *ifs {
@@ -101,57 +101,57 @@ func (ifs *ImageFlagSets) Flags() []string {
 	return flags
 }
 
-// GetCropH retrieves the CropH from ImageFlagSets
-func (ifs *ImageFlagSets) GetCropH() (int, bool) {
+// GetCropH retrieves the CropH from ImageFlagSet
+func (ifs *ImageFlagSet) GetCropH() (int, bool) {
 	value, exists := (*ifs)["crop-h"]
 
 	return value.(int), exists
 }
 
-// GetCropW retrieves the CropW from ImageFlagSets
-func (ifs *ImageFlagSets) GetCropW() (int, bool) {
+// GetCropW retrieves the CropW from ImageFlagSet
+func (ifs *ImageFlagSet) GetCropW() (int, bool) {
 	value, exists := (*ifs)["crop-w"]
 
 	return value.(int), exists
 }
 
-// GetCropX retrieves the CropX from ImageFlagSets
-func (ifs *ImageFlagSets) GetCropX() (int, bool) {
+// GetCropX retrieves the CropX from ImageFlagSet
+func (ifs *ImageFlagSet) GetCropX() (int, bool) {
 	value, exists := (*ifs)["crop-x"]
 
 	return value.(int), exists
 }
 
-// GetCropY retrieves the CropY from ImageFlagSets
-func (ifs *ImageFlagSets) GetCropY() (int, bool) {
+// GetCropY retrieves the CropY from ImageFlagSet
+func (ifs *ImageFlagSet) GetCropY() (int, bool) {
 	value, exists := (*ifs)["crop-y"]
 
 	return value.(int), exists
 }
 
-// GetFormat retrieves the Format from ImageFlagSets
-func (ifs *ImageFlagSets) GetFormat() (string, bool) {
+// GetFormat retrieves the Format from ImageFlagSet
+func (ifs *ImageFlagSet) GetFormat() (string, bool) {
 	value, exists := (*ifs)["format"]
 
 	return value.(string), exists
 }
 
-// GetHeight retrieves the Height from ImageFlagSets
-func (ifs *ImageFlagSets) GetHeight() (int, bool) {
+// GetHeight retrieves the Height from ImageFlagSet
+func (ifs *ImageFlagSet) GetHeight() (int, bool) {
 	value, exists := (*ifs)["height"]
 
 	return value.(int), exists
 }
 
-// GetWidth retrieves the Width from ImageFlagSets
-func (ifs *ImageFlagSets) GetWidth() (int, bool) {
+// GetWidth retrieves the Width from ImageFlagSet
+func (ifs *ImageFlagSet) GetWidth() (int, bool) {
 	value, exists := (*ifs)["width"]
 
 	return value.(int), exists
 }
 
 // Generate creates an image based on the parameters passed in
-func (ifs *ImageFlagSets) Generate(inputURL string, outputFile string) ([]byte, error) {
+func (ifs *ImageFlagSet) Generate(inputURL string, outputFile string) ([]byte, error) {
 	var out []byte
 
 	params := ifs.Flags()

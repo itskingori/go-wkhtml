@@ -72,8 +72,8 @@ func TestNewFlagSetFromJSON(t *testing.T) {
 	}
 }
 
-func TestImageFlagSetsFlags(t *testing.T) {
-	fss := make(wkhtmltox.ImageFlagSets)
+func TestImageFlagSetFlags(t *testing.T) {
+	fss := make(wkhtmltox.ImageFlagSet)
 	fss["crop-h"] = 10
 	fss["format"] = "png"
 
@@ -88,8 +88,8 @@ func TestImageFlagSetsFlags(t *testing.T) {
 	}
 }
 
-func TestImageFlagSetsGetCropH(t *testing.T) {
-	fss := make(wkhtmltox.ImageFlagSets)
+func TestImageFlagSetGetCropH(t *testing.T) {
+	fss := make(wkhtmltox.ImageFlagSet)
 	fss["crop-h"] = 10
 
 	value, exists := fss.GetCropH()
@@ -98,8 +98,8 @@ func TestImageFlagSetsGetCropH(t *testing.T) {
 	}
 }
 
-func TestImageFlagSetsGetCropW(t *testing.T) {
-	fss := make(wkhtmltox.ImageFlagSets)
+func TestImageFlagSetGetCropW(t *testing.T) {
+	fss := make(wkhtmltox.ImageFlagSet)
 	fss["crop-w"] = 10
 
 	value, exists := fss.GetCropW()
@@ -108,8 +108,8 @@ func TestImageFlagSetsGetCropW(t *testing.T) {
 	}
 }
 
-func TestImageFlagSetsGetCropX(t *testing.T) {
-	fss := make(wkhtmltox.ImageFlagSets)
+func TestImageFlagSetGetCropX(t *testing.T) {
+	fss := make(wkhtmltox.ImageFlagSet)
 	fss["crop-x"] = 10
 
 	value, exists := fss.GetCropX()
@@ -118,8 +118,8 @@ func TestImageFlagSetsGetCropX(t *testing.T) {
 	}
 }
 
-func TestImageFlagSetsGetCropY(t *testing.T) {
-	fss := make(wkhtmltox.ImageFlagSets)
+func TestImageFlagSetGetCropY(t *testing.T) {
+	fss := make(wkhtmltox.ImageFlagSet)
 	fss["crop-y"] = 10
 
 	value, exists := fss.GetCropY()
@@ -128,8 +128,8 @@ func TestImageFlagSetsGetCropY(t *testing.T) {
 	}
 }
 
-func TestImageFlagSetsGetFormat(t *testing.T) {
-	fss := make(wkhtmltox.ImageFlagSets)
+func TestImageFlagSetGetFormat(t *testing.T) {
+	fss := make(wkhtmltox.ImageFlagSet)
 	fss["format"] = "png"
 
 	value, exists := fss.GetFormat()
@@ -138,8 +138,8 @@ func TestImageFlagSetsGetFormat(t *testing.T) {
 	}
 }
 
-func TestImageFlagSetsGetHeight(t *testing.T) {
-	fss := make(wkhtmltox.ImageFlagSets)
+func TestImageFlagSetGetHeight(t *testing.T) {
+	fss := make(wkhtmltox.ImageFlagSet)
 	fss["height"] = 10
 
 	value, exists := fss.GetHeight()
@@ -148,8 +148,8 @@ func TestImageFlagSetsGetHeight(t *testing.T) {
 	}
 }
 
-func TestImageFlagSetsGetWidth(t *testing.T) {
-	fss := make(wkhtmltox.ImageFlagSets)
+func TestImageFlagSetGetWidth(t *testing.T) {
+	fss := make(wkhtmltox.ImageFlagSet)
 	fss["width"] = 10
 
 	value, exists := fss.GetWidth()

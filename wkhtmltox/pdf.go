@@ -28,8 +28,8 @@ const (
 	pdfConverterBinary = "wkhtmltopdf"
 )
 
-// PDFFlagSets are key-value pair of PDF converter flags
-type PDFFlagSets FlagSets
+// PDFFlagSet are key-value pair of PDF converter flags
+type PDFFlagSet FlagSet
 
 // PDFOptions represents a wkhtmlpdf attributes
 type PDFOptions struct {
@@ -44,7 +44,7 @@ type PDFOptions struct {
 }
 
 // NewPDFFlagSetFromJSON create pdf options from JSON
-func NewPDFFlagSetFromJSON(data []byte) (PDFFlagSets, error) {
+func NewPDFFlagSetFromJSON(data []byte) (PDFFlagSet, error) {
 	opts := &PDFOptions{}
 
 	err := json.Unmarshal(data, &opts)
@@ -56,8 +56,8 @@ func NewPDFFlagSetFromJSON(data []byte) (PDFFlagSets, error) {
 	return pfs, nil
 }
 
-func (opts *PDFOptions) convertToFlagSet() PDFFlagSets {
-	pfs := make(PDFFlagSets)
+func (opts *PDFOptions) convertToFlagSet() PDFFlagSet {
+	pfs := make(PDFFlagSet)
 
 	if opts.MarginTop != nil {
 		pfs["margin-top"] = *opts.MarginTop
@@ -91,7 +91,7 @@ func (opts *PDFOptions) convertToFlagSet() PDFFlagSets {
 }
 
 // Flags converts a FlagSet to a String slice
-func (pfs *PDFFlagSets) Flags() []string {
+func (pfs *PDFFlagSet) Flags() []string {
 	var flags []string
 
 	for flagKey, flagValue := range *pfs {
@@ -101,57 +101,57 @@ func (pfs *PDFFlagSets) Flags() []string {
 	return flags
 }
 
-// GetMarginTop retrieves the MarginTop from PDFFlagSets
-func (pfs *PDFFlagSets) GetMarginTop() (int, bool) {
+// GetMarginTop retrieves the MarginTop from PDFFlagSet
+func (pfs *PDFFlagSet) GetMarginTop() (int, bool) {
 	value, exists := (*pfs)["margin-top"]
 
 	return value.(int), exists
 }
 
-// GetMarginBottom retrieves the MarginBottom from PDFFlagSets
-func (pfs *PDFFlagSets) GetMarginBottom() (int, bool) {
+// GetMarginBottom retrieves the MarginBottom from PDFFlagSet
+func (pfs *PDFFlagSet) GetMarginBottom() (int, bool) {
 	value, exists := (*pfs)["margin-bottom"]
 
 	return value.(int), exists
 }
 
-// GetMarginLeft retrieves the MarginLeft from PDFFlagSets
-func (pfs *PDFFlagSets) GetMarginLeft() (int, bool) {
+// GetMarginLeft retrieves the MarginLeft from PDFFlagSet
+func (pfs *PDFFlagSet) GetMarginLeft() (int, bool) {
 	value, exists := (*pfs)["margin-left"]
 
 	return value.(int), exists
 }
 
-// GetMarginRight retrieves the MarginRight from PDFFlagSets
-func (pfs *PDFFlagSets) GetMarginRight() (int, bool) {
+// GetMarginRight retrieves the MarginRight from PDFFlagSet
+func (pfs *PDFFlagSet) GetMarginRight() (int, bool) {
 	value, exists := (*pfs)["margin-right"]
 
 	return value.(int), exists
 }
 
-// GetPageHeight retrieves the PageHeight from PDFFlagSets
-func (pfs *PDFFlagSets) GetPageHeight() (int, bool) {
+// GetPageHeight retrieves the PageHeight from PDFFlagSet
+func (pfs *PDFFlagSet) GetPageHeight() (int, bool) {
 	value, exists := (*pfs)["page-height"]
 
 	return value.(int), exists
 }
 
-// GetPageWidth retrieves the PageWidth from PDFFlagSets
-func (pfs *PDFFlagSets) GetPageWidth() (int, bool) {
+// GetPageWidth retrieves the PageWidth from PDFFlagSet
+func (pfs *PDFFlagSet) GetPageWidth() (int, bool) {
 	value, exists := (*pfs)["page-width"]
 
 	return value.(int), exists
 }
 
-// GetPageSize retrieves the PageSize from PDFFlagSets
-func (pfs *PDFFlagSets) GetPageSize() (string, bool) {
+// GetPageSize retrieves the PageSize from PDFFlagSet
+func (pfs *PDFFlagSet) GetPageSize() (string, bool) {
 	value, exists := (*pfs)["page-size"]
 
 	return value.(string), exists
 }
 
 // Generate creates an pdf based on the parameters passed in
-func (pfs *PDFFlagSets) Generate(inputURL string, outputFile string) ([]byte, error) {
+func (pfs *PDFFlagSet) Generate(inputURL string, outputFile string) ([]byte, error) {
 	var out []byte
 
 	params := pfs.Flags()
