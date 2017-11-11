@@ -2,7 +2,7 @@
 
 ## 0.1.0
 
-* Add image package. Supports limited set of options:
+* Adds basic image generation functionality. Supported options are:
 	* `crop-h`
 	* `crop-w`
 	* `crop-x`
@@ -10,7 +10,7 @@
 	* `format`
 	* `height`
 	* `width`
-* Add pdf package. Supports limited set of options:
+* Adds basic pdf generation functionality. Supported options are:
 	* `margin-top`
 	* `margin-bottom`
 	* `margin-left`
