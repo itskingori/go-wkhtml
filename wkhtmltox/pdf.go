@@ -33,19 +33,14 @@ type PDFFlagSets map[string]interface{}
 
 // PDFOptions represents a wkhtmlpdf attributes
 type PDFOptions struct {
-	PDFGlobalOptions
-}
-
-// PDFGlobalOptions represents wkhtmltopdf global options
-type PDFGlobalOptions struct {
-	MarginTop    *int `json:"margin_top,omitempty"`    // Set the page top margin
-	MarginBottom *int `json:"margin_bottom,omitempty"` // Set the page bottom margin
-	MarginLeft   *int `json:"margin_left,omitempty"`   // Set the page left margin
-	MarginRight  *int `json:"margin_right,omitempty"`  // Set the page right margin
-
-	PageHeight *int    `json:"page_height,omitempty"` // Height of the page
-	PageWidth  *int    `json:"page_width,omitempty"`  // Width of the page
-	PageSize   *string `json:"page_size,omitempty"`   // Size of the page
+	// Global
+	MarginTop    *int    `json:"margin_top,omitempty"`    // Set the page top margin
+	MarginBottom *int    `json:"margin_bottom,omitempty"` // Set the page bottom margin
+	MarginLeft   *int    `json:"margin_left,omitempty"`   // Set the page left margin
+	MarginRight  *int    `json:"margin_right,omitempty"`  // Set the page right margin
+	PageHeight   *int    `json:"page_height,omitempty"`   // Height of the page
+	PageWidth    *int    `json:"page_width,omitempty"`    // Width of the page
+	PageSize     *string `json:"page_size,omitempty"`     // Size of the page
 }
 
 // NewPDFOptionsFromJSON create pdf options from JSON

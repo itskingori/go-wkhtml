@@ -33,16 +33,11 @@ type ImageFlagSets map[string]interface{}
 
 // ImageOptions represents a wkhtmlimage attributes
 type ImageOptions struct {
-	ImageGeneralOptions
-}
-
-// ImageGeneralOptions represents wkhtmltoimage general options
-type ImageGeneralOptions struct {
-	CropH *int `json:"crop_h,omitempty"` // Set height for cropping
-	CropW *int `json:"crop_w,omitempty"` // Set width for cropping
-	CropX *int `json:"crop_x,omitempty"` // Set x coordinate for cropping
-	CropY *int `json:"crop_y,omitempty"` // Set y coordinate for cropping
-
+	// General
+	CropH  *int    `json:"crop_h,omitempty"` // Set height for cropping
+	CropW  *int    `json:"crop_w,omitempty"` // Set width for cropping
+	CropX  *int    `json:"crop_x,omitempty"` // Set x coordinate for cropping
+	CropY  *int    `json:"crop_y,omitempty"` // Set y coordinate for cropping
 	Format *string `json:"format,omitempty"` // Output file format
 	Height *int    `json:"height,omitempty"` // Set screen height
 	Width  *int    `json:"width,omitempty"`  // Set screen width

@@ -81,7 +81,7 @@ func TestPDFOptionsFlags(t *testing.T) {
 	pageWidth := 10
 	pageSize := "A4"
 
-	gopts := wkhtmltox.PDFGlobalOptions{
+	opts := wkhtmltox.PDFOptions{
 		MarginTop:    &marginTop,
 		MarginBottom: &marginBottom,
 		MarginLeft:   &marginLeft,
@@ -90,8 +90,6 @@ func TestPDFOptionsFlags(t *testing.T) {
 		PageWidth:    &pageWidth,
 		PageSize:     &pageSize,
 	}
-
-	opts := wkhtmltox.PDFOptions{PDFGlobalOptions: gopts}
 	flags := opts.Flags()
 
 	if flags["margin-top"] != 10 {

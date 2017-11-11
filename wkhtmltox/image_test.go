@@ -81,7 +81,7 @@ func TestImageOptionsFlags(t *testing.T) {
 	height := 10
 	width := 10
 
-	gopts := wkhtmltox.ImageGeneralOptions{
+	opts := wkhtmltox.ImageOptions{
 		CropH:  &cropH,
 		CropW:  &cropW,
 		CropX:  &cropX,
@@ -90,8 +90,6 @@ func TestImageOptionsFlags(t *testing.T) {
 		Height: &height,
 		Width:  &width,
 	}
-
-	opts := wkhtmltox.ImageOptions{ImageGeneralOptions: gopts}
 	flags := opts.Flags()
 
 	if flags["crop-h"] != 10 {
