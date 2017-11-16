@@ -27,7 +27,7 @@ const (
 )
 
 // ImageFlagSet represents key-value pairs of image converter flags
-type ImageFlagSet FlagSet
+type ImageFlagSet flagSet
 
 // ImageOptions represents wkhtmlimage attributes
 type ImageOptions struct {

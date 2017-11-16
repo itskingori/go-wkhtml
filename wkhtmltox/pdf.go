@@ -27,7 +27,7 @@ const (
 )
 
 // PDFFlagSet represents key-value pairs of PDF converter flags
-type PDFFlagSet FlagSet
+type PDFFlagSet flagSet
 
 // PDFOptions represents wkhtmlpdf attributes
 type PDFOptions struct {
