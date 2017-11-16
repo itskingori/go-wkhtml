@@ -18,3 +18,15 @@
 package wkhtmltox
 
 type flagSet map[string]interface{}
+
+// CookieSet represents cookie name and value
+type CookieSet struct {
+	Name  string `json:"name,omitempty"`
+	Value string `json:"value,omitempty"`
+}
+
+// HeaderSet represents header name and value
+type HeaderSet struct {
+	Name  string `json:"name,omitempty"`
+	Value string `json:"value,omitempty"`
+}
