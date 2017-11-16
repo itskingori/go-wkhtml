@@ -70,8 +70,8 @@ type PDFOptions struct {
 	Zoom                    *float64     `json:"zoom,omitempty"`                      // Use this zoom factor
 }
 
-// FlagSet generates a FlagSet from PDFOptions
-func (opts *PDFOptions) FlagSet() PDFFlagSet {
+// NewPDFFlagSetFromOptions generates a FlagSet from PDFOptions
+func NewPDFFlagSetFromOptions(opts *PDFOptions) PDFFlagSet {
 	pfs := make(PDFFlagSet)
 
 	if opts.CacheDir != nil {

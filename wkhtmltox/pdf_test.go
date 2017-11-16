@@ -25,52 +25,22 @@ import (
 	"github.com/itskingori/go-wkhtml/wkhtmltox"
 )
 
-func TestPDFOptionsFlagSet(t *testing.T) {
-	marginTop := 10
-	marginBottom := 10
-	marginLeft := 10
-	marginRight := 10
-	pageHeight := 10
-	pageWidth := 10
+func TestPDFNewPDFFlagSetFromOptions(t *testing.T) {
 	pageSize := "A4"
 
 	opts := wkhtmltox.PDFOptions{
-		MarginTop:    &marginTop,
-		MarginBottom: &marginBottom,
-		MarginLeft:   &marginLeft,
-		MarginRight:  &marginRight,
-		PageHeight:   &pageHeight,
-		PageWidth:    &pageWidth,
-		PageSize:     &pageSize,
+		PageSize: &pageSize,
 	}
-	pfs := opts.FlagSet()
+	pfs := wkhtmltox.NewPDFFlagSetFromOptions(&opts)
 
-	if pfs["margin-top"] != 10 {
-		t.Fatalf("expected %s to be %d, got %d", "crop-h", 10, pfs["margin-top"])
-	}
-
-	if pfs["margin-bottom"] != 10 {
-		t.Fatalf("expected %s to be %d, got %d", "crop-w", 10, pfs["margin-bottom"])
-	}
-
-	if pfs["margin-left"] != 10 {
-		t.Fatalf("expected %s to be %d, got %d", "crop-x", 10, pfs["margin-left"])
-	}
-
-	if pfs["margin-right"] != 10 {
-		t.Fatalf("expected %s to be %d, got %d", "crop-y", 10, pfs["margin-right"])
-	}
-
-	if pfs["page-height"] != 10 {
-		t.Fatalf("expected %s to be %d, got %d", "format", 10, pfs["page-height"])
-	}
-
-	if pfs["page-width"] != 10 {
-		t.Fatalf("expected %s to be %d, got %d", "height", 10, pfs["page-width"])
-	}
-
-	if pfs["page-size"] != "A4" {
+	// when set
+	if value, exists := pfs["page-size"]; !exists && value != "A4" {
 		t.Fatalf("expected %s to be %s, got %s", "width", "A4", pfs["page-size"])
+	}
+
+	// when not set
+	if _, exists := pfs["page-width"]; exists {
+		t.Fatalf("expected %s to be %d, got %d", "height", 10, pfs["page-width"])
 	}
 }
 

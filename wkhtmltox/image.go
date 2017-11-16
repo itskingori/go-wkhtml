@@ -60,8 +60,8 @@ type ImageOptions struct {
 	Zoom                    *float64     `json:"zoom,omitempty"`                      // Use this zoom factor
 }
 
-// FlagSet generates a FlagSet from ImageOptions
-func (opts *ImageOptions) FlagSet() ImageFlagSet {
+// NewImageFlagSetFromOptions generates a FlagSet from ImageOptions
+func NewImageFlagSetFromOptions(opts *ImageOptions) ImageFlagSet {
 	ifs := make(ImageFlagSet)
 
 	if opts.CacheDir != nil {

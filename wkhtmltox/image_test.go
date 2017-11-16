@@ -25,52 +25,22 @@ import (
 	"github.com/itskingori/go-wkhtml/wkhtmltox"
 )
 
-func TestImageOptionsFlagSet(t *testing.T) {
-	cropH := 10
-	cropW := 10
-	cropX := 10
-	cropY := 10
+func TestImageNewImageFlagSetFromOptions(t *testing.T) {
 	format := "png"
-	height := 10
-	width := 10
 
 	opts := wkhtmltox.ImageOptions{
-		CropH:  &cropH,
-		CropW:  &cropW,
-		CropX:  &cropX,
-		CropY:  &cropY,
 		Format: &format,
-		Height: &height,
-		Width:  &width,
 	}
-	ifs := opts.FlagSet()
+	ifs := wkhtmltox.NewImageFlagSetFromOptions(&opts)
 
-	if ifs["crop-h"] != 10 {
-		t.Fatalf("expected %s to be %d, got %d", "crop-h", 10, ifs["crop-h"])
-	}
-
-	if ifs["crop-w"] != 10 {
-		t.Fatalf("expected %s to be %d, got %d", "crop-w", 10, ifs["crop-w"])
-	}
-
-	if ifs["crop-x"] != 10 {
-		t.Fatalf("expected %s to be %d, got %d", "crop-x", 10, ifs["crop-x"])
-	}
-
-	if ifs["crop-y"] != 10 {
-		t.Fatalf("expected %s to be %d, got %d", "crop-y", 10, ifs["crop-y"])
-	}
-
-	if ifs["format"] != "png" {
+	// when set
+	if value, exists := ifs["format"]; !exists && value != "png" {
 		t.Fatalf("expected %s to be %s, got %s", "format", "png", ifs["format"])
 	}
 
-	if ifs["height"] != 10 {
+	// when not set
+	if _, exists := ifs["height"]; exists {
 		t.Fatalf("expected %s to be %d, got %d", "height", 10, ifs["height"])
-	}
-
-	if ifs["width"] != 10 {
-		t.Fatalf("expected %s to be %d, got %d", "width", 10, ifs["width"])
 	}
 }
 
