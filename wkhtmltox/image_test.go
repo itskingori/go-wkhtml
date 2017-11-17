@@ -72,8 +72,8 @@ func TestImageFlagSetGetCacheDir(t *testing.T) {
 	}
 }
 
-func TestImageFlagSetGetCookies(t *testing.T) {
-	attribute := "cookies"
+func TestImageFlagSetGetCookie(t *testing.T) {
+	attribute := "cookie"
 	cookies := []wkhtmltox.CookieSet{
 		wkhtmltox.CookieSet{
 			Name:  "cookie1",
@@ -87,7 +87,7 @@ func TestImageFlagSetGetCookies(t *testing.T) {
 	ifs := make(wkhtmltox.ImageFlagSet)
 	ifs[attribute] = cookies
 
-	result, exists := ifs.GetCookies()
+	result, exists := ifs.GetCookie()
 	if !exists && !reflect.DeepEqual(result, cookies) {
 		t.Fatalf("expected %s to be %s, got %s", attribute, cookies, result)
 	}
@@ -141,8 +141,8 @@ func TestImageFlagSetGetCropY(t *testing.T) {
 	}
 }
 
-func TestImageFlagSetGetCustomHeaders(t *testing.T) {
-	attribute := "custom-headers"
+func TestImageFlagSetGetCustomHeader(t *testing.T) {
+	attribute := "custom-header"
 	headers := []wkhtmltox.HeaderSet{
 		wkhtmltox.HeaderSet{
 			Name:  "cookie1",
@@ -155,7 +155,7 @@ func TestImageFlagSetGetCustomHeaders(t *testing.T) {
 	}
 	ifs := make(wkhtmltox.ImageFlagSet)
 	ifs[attribute] = headers
-	result, exists := ifs.GetCustomHeaders()
+	result, exists := ifs.GetCustomHeader()
 
 	if !exists && !reflect.DeepEqual(result, headers) {
 		t.Fatalf("expected %s to be %s, got %s", attribute, headers, result)
@@ -413,8 +413,8 @@ func TestImageFlagSetSetCacheDir(t *testing.T) {
 	}
 }
 
-func TestImageFlagSetSetCookies(t *testing.T) {
-	attribute := "cookies"
+func TestImageFlagSetSetCookie(t *testing.T) {
+	attribute := "cookie"
 	cookies := []wkhtmltox.CookieSet{
 		wkhtmltox.CookieSet{
 			Name:  "cookie1",
@@ -426,7 +426,7 @@ func TestImageFlagSetSetCookies(t *testing.T) {
 		},
 	}
 	ifs := make(wkhtmltox.ImageFlagSet)
-	ifs.SetCookies(cookies)
+	ifs.SetCookie(cookies)
 
 	if !reflect.DeepEqual(ifs[attribute], cookies) {
 		t.Fatalf("expected %s to be %s, got %s", attribute, cookies, ifs[attribute])
@@ -477,8 +477,8 @@ func TestImageFlagSetSetCropY(t *testing.T) {
 	}
 }
 
-func TestImageFlagSetSetCustomHeaders(t *testing.T) {
-	attribute := "custom-headers"
+func TestImageFlagSetSetCustomHeader(t *testing.T) {
+	attribute := "custom-header"
 	headers := []wkhtmltox.HeaderSet{
 		wkhtmltox.HeaderSet{
 			Name:  "cookie1",
@@ -490,7 +490,7 @@ func TestImageFlagSetSetCustomHeaders(t *testing.T) {
 		},
 	}
 	ifs := make(wkhtmltox.ImageFlagSet)
-	ifs.SetCustomHeaders(headers)
+	ifs.SetCustomHeader(headers)
 
 	if !reflect.DeepEqual(ifs[attribute], headers) {
 		t.Fatalf("expected %s to be %s, got %s", attribute, headers, ifs[attribute])

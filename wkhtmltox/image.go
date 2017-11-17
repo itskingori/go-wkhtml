@@ -32,13 +32,13 @@ type ImageFlagSet flagSet
 // ImageOptions represents wkhtmlimage attributes
 type ImageOptions struct {
 	CacheDir                *string      `json:"cache_dir,omitempty"`                 // Web cache directory
-	Cookies                 *[]CookieSet `json:"cookies,omitempty"`                   // Set an additional cookie with URL encoded values
+	Cookie                  *[]CookieSet `json:"cookie,omitempty"`                    // Set an additional cookie with URL encoded values
 	CropH                   *int         `json:"crop_h,omitempty"`                    // Set height for cropping
 	CropW                   *int         `json:"crop_w,omitempty"`                    // Set width for cropping
 	CropX                   *int         `json:"crop_x,omitempty"`                    // Set x coordinate for cropping
 	CropY                   *int         `json:"crop_y,omitempty"`                    // Set y coordinate for cropping
-	CustomHeaders           *[]HeaderSet `json:"custom_headers,omitempty"`            // Set an additional HTTP header
-	CustomHeaderPropagation *bool        `json:"custom_header_propagation,omitempty"` // Add HTTP headers specified by CustomHeaders for each resource request
+	CustomHeader            *[]HeaderSet `json:"custom_header,omitempty"`             // Set an additional HTTP header
+	CustomHeaderPropagation *bool        `json:"custom_header_propagation,omitempty"` // Add HTTP headers specified by CustomHeader for each resource request
 	DebugJavascript         *bool        `json:"debug_javascript,omitempty"`          // Show javascript debugging output
 	Encoding                *string      `json:"encoding,omitempty"`                  // Set the default text encoding, for input
 	Format                  *string      `json:"format,omitempty"`                    // Output file format
@@ -68,8 +68,8 @@ func NewImageFlagSetFromOptions(opts *ImageOptions) ImageFlagSet {
 		ifs.SetCacheDir(*opts.CacheDir)
 	}
 
-	if opts.Cookies != nil {
-		ifs.SetCookies(*opts.Cookies)
+	if opts.Cookie != nil {
+		ifs.SetCookie(*opts.Cookie)
 	}
 
 	if opts.CropH != nil {
@@ -88,8 +88,8 @@ func NewImageFlagSetFromOptions(opts *ImageOptions) ImageFlagSet {
 		ifs.SetCropY(*opts.CropY)
 	}
 
-	if opts.CustomHeaders != nil {
-		ifs.SetCustomHeaders(*opts.CustomHeaders)
+	if opts.CustomHeader != nil {
+		ifs.SetCustomHeader(*opts.CustomHeader)
 	}
 
 	if opts.CustomHeaderPropagation != nil {
@@ -193,9 +193,9 @@ func (ifs *ImageFlagSet) GetCacheDir() (string, bool) {
 	return dir.(string), exists
 }
 
-// GetCookies retrieves the Cookies from an ImageFlagSet
-func (ifs *ImageFlagSet) GetCookies() ([]CookieSet, bool) {
-	cookies, exists := (*ifs)["cookies"]
+// GetCookie retrieves the Cookie from an ImageFlagSet
+func (ifs *ImageFlagSet) GetCookie() ([]CookieSet, bool) {
+	cookies, exists := (*ifs)["cookie"]
 
 	return cookies.([]CookieSet), exists
 }
@@ -228,9 +228,9 @@ func (ifs *ImageFlagSet) GetCropY() (int, bool) {
 	return yc.(int), exists
 }
 
-// GetCustomHeaders retrieves the CustomHeaders from an ImageFlagSet
-func (ifs *ImageFlagSet) GetCustomHeaders() ([]HeaderSet, bool) {
-	headers, exists := (*ifs)["custom-headers"]
+// GetCustomHeader retrieves the CustomHeader from an ImageFlagSet
+func (ifs *ImageFlagSet) GetCustomHeader() ([]HeaderSet, bool) {
+	headers, exists := (*ifs)["custom-header"]
 
 	return headers.([]HeaderSet), exists
 }
@@ -380,9 +380,9 @@ func (ifs *ImageFlagSet) SetCacheDir(dir string) {
 	(*ifs)["cache-dir"] = dir
 }
 
-// SetCookies sets the Cookies of an ImageFlagSet
-func (ifs *ImageFlagSet) SetCookies(cookies []CookieSet) {
-	(*ifs)["cookies"] = cookies
+// SetCookie sets the Cookie of an ImageFlagSet
+func (ifs *ImageFlagSet) SetCookie(cookies []CookieSet) {
+	(*ifs)["cookie"] = cookies
 }
 
 // SetCropH sets the CropH of an ImageFlagSet
@@ -405,9 +405,9 @@ func (ifs *ImageFlagSet) SetCropY(yc int) {
 	(*ifs)["crop-y"] = yc
 }
 
-// SetCustomHeaders sets the CustomHeaders of an ImageFlagSet
-func (ifs *ImageFlagSet) SetCustomHeaders(headers []HeaderSet) {
-	(*ifs)["custom-headers"] = headers
+// SetCustomHeader sets the CustomHeader of an ImageFlagSet
+func (ifs *ImageFlagSet) SetCustomHeader(headers []HeaderSet) {
+	(*ifs)["custom-header"] = headers
 }
 
 // SetCustomHeaderPropagation sets the CustomHeaderPropagation of an ImageFlagSet

@@ -32,9 +32,9 @@ type PDFFlagSet flagSet
 // PDFOptions represents wkhtmlpdf attributes
 type PDFOptions struct {
 	CacheDir                *string      `json:"cache_dir,omitempty"`                 // Web cache directory
-	Cookies                 *[]CookieSet `json:"cookies,omitempty"`                   // Set an additional cookie with url encoded values
-	CustomHeaders           *[]HeaderSet `json:"custom_headers,omitempty"`            // Set an additional HTTP header
-	CustomHeaderPropagation *bool        `json:"custom_header_propagation,omitempty"` // Add HTTP headers specified by CustomHeaders for each resource request
+	Cookie                  *[]CookieSet `json:"cookies,omitempty"`                   // Set an additional cookie with url encoded values
+	CustomHeader            *[]HeaderSet `json:"custom_headers,omitempty"`            // Set an additional HTTP header
+	CustomHeaderPropagation *bool        `json:"custom_header_propagation,omitempty"` // Add HTTP headers specified by CustomHeader for each resource request
 	DebugJavascript         *bool        `json:"debug_javascript,omitempty"`          // Show javascript debugging output
 	DPI                     *int         `json:"dpi,omitempty"`                       // Change the DPI explicitly
 	Encoding                *string      `json:"encoding,omitempty"`                  // Set the default text encoding, for input
@@ -77,12 +77,12 @@ func NewPDFFlagSetFromOptions(opts *PDFOptions) PDFFlagSet {
 		pfs.SetCacheDir(*opts.CacheDir)
 	}
 
-	if opts.Cookies != nil {
-		pfs.SetCookies(*opts.Cookies)
+	if opts.Cookie != nil {
+		pfs.SetCookie(*opts.Cookie)
 	}
 
-	if opts.CustomHeaders != nil {
-		pfs.SetCustomHeaders(*opts.CustomHeaders)
+	if opts.CustomHeader != nil {
+		pfs.SetCustomHeader(*opts.CustomHeader)
 	}
 
 	if opts.CustomHeaderPropagation != nil {
@@ -238,16 +238,16 @@ func (pfs *PDFFlagSet) GetCacheDir() (string, bool) {
 	return value.(string), exists
 }
 
-// GetCookies retrieves the Cookies from a PDFFlagSet
-func (pfs *PDFFlagSet) GetCookies() ([]CookieSet, bool) {
-	value, exists := (*pfs)["cookies"]
+// GetCookie retrieves the Cookie from a PDFFlagSet
+func (pfs *PDFFlagSet) GetCookie() ([]CookieSet, bool) {
+	value, exists := (*pfs)["cookie"]
 
 	return value.([]CookieSet), exists
 }
 
-// GetCustomHeaders retrieves the CustomHeaders from a PDFFlagSet
-func (pfs *PDFFlagSet) GetCustomHeaders() ([]HeaderSet, bool) {
-	value, exists := (*pfs)["custom-headers"]
+// GetCustomHeader retrieves the CustomHeader from a PDFFlagSet
+func (pfs *PDFFlagSet) GetCustomHeader() ([]HeaderSet, bool) {
+	value, exists := (*pfs)["custom-header"]
 
 	return value.([]HeaderSet), exists
 }
@@ -488,14 +488,14 @@ func (pfs *PDFFlagSet) SetCacheDir(dir string) {
 	(*pfs)["cache-dir"] = dir
 }
 
-// SetCookies sets the Cookies of a PDFFlagSet
-func (pfs *PDFFlagSet) SetCookies(cookies []CookieSet) {
-	(*pfs)["cookies"] = cookies
+// SetCookie sets the Cookie of a PDFFlagSet
+func (pfs *PDFFlagSet) SetCookie(cookies []CookieSet) {
+	(*pfs)["cookie"] = cookies
 }
 
-// SetCustomHeaders sets the CustomHeaders of a PDFFlagSet
-func (pfs *PDFFlagSet) SetCustomHeaders(headers []HeaderSet) {
-	(*pfs)["custom-headers"] = headers
+// SetCustomHeader sets the CustomHeader of a PDFFlagSet
+func (pfs *PDFFlagSet) SetCustomHeader(headers []HeaderSet) {
+	(*pfs)["custom-header"] = headers
 }
 
 // SetCustomHeaderPropagation sets the CustomHeaderPropagation of a PDFFlagSet

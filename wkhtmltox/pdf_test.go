@@ -72,8 +72,8 @@ func TestPDFFlagSetGetCacheDir(t *testing.T) {
 	}
 }
 
-func TestPDFFlagSetGetCookies(t *testing.T) {
-	attribute := "cookies"
+func TestPDFFlagSetGetCookie(t *testing.T) {
+	attribute := "cookie"
 	cookies := []wkhtmltox.CookieSet{
 		wkhtmltox.CookieSet{
 			Name:  "cookie1",
@@ -85,16 +85,16 @@ func TestPDFFlagSetGetCookies(t *testing.T) {
 		},
 	}
 	pfs := make(wkhtmltox.PDFFlagSet)
-	pfs["cookies"] = cookies
-	result, exists := pfs.GetCookies()
+	pfs["cookie"] = cookies
+	result, exists := pfs.GetCookie()
 
 	if !exists && !reflect.DeepEqual(result, cookies) {
 		t.Fatalf("expected %s to be %s, got %s", attribute, cookies, result)
 	}
 }
 
-func TestPDFFlagSetGetCustomHeaders(t *testing.T) {
-	attribute := "custom-headers"
+func TestPDFFlagSetGetCustomHeader(t *testing.T) {
+	attribute := "custom-header"
 	headers := []wkhtmltox.HeaderSet{
 		wkhtmltox.HeaderSet{
 			Name:  "cookie1",
@@ -106,8 +106,8 @@ func TestPDFFlagSetGetCustomHeaders(t *testing.T) {
 		},
 	}
 	pfs := make(wkhtmltox.PDFFlagSet)
-	pfs["custom-headers"] = headers
-	result, exists := pfs.GetCustomHeaders()
+	pfs["custom-header"] = headers
+	result, exists := pfs.GetCustomHeader()
 
 	if !exists && !reflect.DeepEqual(result, headers) {
 		t.Fatalf("expected %s to be %s, got %s", attribute, headers, result)
@@ -521,8 +521,8 @@ func TestPDFFlagSetSetCacheDir(t *testing.T) {
 	}
 }
 
-func TestPDFFlagSetSetCookies(t *testing.T) {
-	attribute := "cookies"
+func TestPDFFlagSetSetCookie(t *testing.T) {
+	attribute := "cookie"
 	cookies := []wkhtmltox.CookieSet{
 		wkhtmltox.CookieSet{
 			Name:  "cookie1",
@@ -534,15 +534,15 @@ func TestPDFFlagSetSetCookies(t *testing.T) {
 		},
 	}
 	pfs := make(wkhtmltox.PDFFlagSet)
-	pfs.SetCookies(cookies)
+	pfs.SetCookie(cookies)
 
 	if !reflect.DeepEqual(pfs[attribute], cookies) {
 		t.Fatalf("expected %s to be %s, got %s", attribute, cookies, pfs[attribute])
 	}
 }
 
-func TestPDFFlagSetSetCustomHeaders(t *testing.T) {
-	attribute := "custom-headers"
+func TestPDFFlagSetSetCustomHeader(t *testing.T) {
+	attribute := "custom-header"
 	headers := []wkhtmltox.HeaderSet{
 		wkhtmltox.HeaderSet{
 			Name:  "cookie1",
@@ -554,7 +554,7 @@ func TestPDFFlagSetSetCustomHeaders(t *testing.T) {
 		},
 	}
 	pfs := make(wkhtmltox.PDFFlagSet)
-	pfs.SetCustomHeaders(headers)
+	pfs.SetCustomHeader(headers)
 
 	if !reflect.DeepEqual(pfs[attribute], headers) {
 		t.Fatalf("expected %s to be %s, got %s", attribute, headers, pfs[attribute])
