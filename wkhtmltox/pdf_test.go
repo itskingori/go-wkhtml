@@ -19,7 +19,6 @@ package wkhtmltox_test
 
 import (
 	"reflect"
-	"sort"
 	"testing"
 
 	"github.com/itskingori/go-wkhtml/wkhtmltox"
@@ -46,15 +45,408 @@ func TestPDFNewPDFFlagSetFromOptions(t *testing.T) {
 
 func TestPDFFlagSetFlags(t *testing.T) {
 	pfs := make(wkhtmltox.PDFFlagSet)
-	pfs["margin-top"] = 10
-	pfs["page-size"] = "A4"
-
-	expected := []string{"--margin-top", "10", "--page-size", "A4"}
+	pfs["cache-dir"] = "/some/dir"
+	expected := []string{"--cache-dir", "/some/dir"}
 	got := pfs.Flags()
+	if !reflect.DeepEqual(expected, got) {
+		t.Fatalf("expected '%s' but got '%s'", expected, got)
+	}
 
-	sort.Strings(expected)
-	sort.Strings(got)
+	pfs = make(wkhtmltox.PDFFlagSet)
+	pfs["cookie"] = []wkhtmltox.CookieSet{
+		wkhtmltox.CookieSet{
+			Name:  "cookie1",
+			Value: "value1",
+		},
+		wkhtmltox.CookieSet{
+			Name:  "cookie2",
+			Value: "value2",
+		},
+	}
+	expected = []string{"--cookie", "cookie1", "value1", "--cookie", "cookie2", "value2"}
+	got = pfs.Flags()
+	if !reflect.DeepEqual(expected, got) {
+		t.Fatalf("expected '%s' but got '%s'", expected, got)
+	}
 
+	pfs = make(wkhtmltox.PDFFlagSet)
+	pfs["custom-header"] = []wkhtmltox.HeaderSet{
+		wkhtmltox.HeaderSet{
+			Name:  "header1",
+			Value: "value1",
+		},
+		wkhtmltox.HeaderSet{
+			Name:  "header2",
+			Value: "value2",
+		},
+	}
+	expected = []string{"--custom-header", "header1", "value1", "--custom-header", "header2", "value2"}
+	got = pfs.Flags()
+	if !reflect.DeepEqual(expected, got) {
+		t.Fatalf("expected '%s' but got '%s'", expected, got)
+	}
+
+	pfs = make(wkhtmltox.PDFFlagSet)
+	pfs["custom-header-propagation"] = true
+	expected = []string{"--custom-header-propagation"}
+	got = pfs.Flags()
+	if !reflect.DeepEqual(expected, got) {
+		t.Fatalf("expected '%s' but got '%s'", expected, got)
+	}
+
+	pfs = make(wkhtmltox.PDFFlagSet)
+	pfs["custom-header-propagation"] = false
+	expected = []string{"--no-custom-header-propagation"}
+	got = pfs.Flags()
+	if !reflect.DeepEqual(expected, got) {
+		t.Fatalf("expected '%s' but got '%s'", expected, got)
+	}
+
+	pfs = make(wkhtmltox.PDFFlagSet)
+	pfs["debug-javascript"] = true
+	expected = []string{"--debug-javascript"}
+	got = pfs.Flags()
+	if !reflect.DeepEqual(expected, got) {
+		t.Fatalf("expected '%s' but got '%s'", expected, got)
+	}
+
+	pfs = make(wkhtmltox.PDFFlagSet)
+	pfs["debug-javascript"] = false
+	expected = []string{"--no-debug-javascript"}
+	got = pfs.Flags()
+	if !reflect.DeepEqual(expected, got) {
+		t.Fatalf("expected '%s' but got '%s'", expected, got)
+	}
+
+	pfs = make(wkhtmltox.PDFFlagSet)
+	pfs["dpi"] = 600
+	expected = []string{"--dpi", "600"}
+	got = pfs.Flags()
+	if !reflect.DeepEqual(expected, got) {
+		t.Fatalf("expected '%s' but got '%s'", expected, got)
+	}
+
+	pfs = make(wkhtmltox.PDFFlagSet)
+	pfs["encoding"] = "utf-8"
+	expected = []string{"--encoding", "utf-8"}
+	got = pfs.Flags()
+	if !reflect.DeepEqual(expected, got) {
+		t.Fatalf("expected '%s' but got '%s'", expected, got)
+	}
+
+	pfs = make(wkhtmltox.PDFFlagSet)
+	pfs["external-links"] = false
+	expected = []string{"--disable-external-links"}
+	got = pfs.Flags()
+	if !reflect.DeepEqual(expected, got) {
+		t.Fatalf("expected '%s' but got '%s'", expected, got)
+	}
+
+	pfs = make(wkhtmltox.PDFFlagSet)
+	pfs["external-links"] = true
+	expected = []string{"--enable-external-links"}
+	got = pfs.Flags()
+	if !reflect.DeepEqual(expected, got) {
+		t.Fatalf("expected '%s' but got '%s'", expected, got)
+	}
+
+	pfs = make(wkhtmltox.PDFFlagSet)
+	pfs["forms"] = false
+	expected = []string{"--disable-forms"}
+	got = pfs.Flags()
+	if !reflect.DeepEqual(expected, got) {
+		t.Fatalf("expected '%s' but got '%s'", expected, got)
+	}
+
+	pfs = make(wkhtmltox.PDFFlagSet)
+	pfs["forms"] = true
+	expected = []string{"--enable-forms"}
+	got = pfs.Flags()
+	if !reflect.DeepEqual(expected, got) {
+		t.Fatalf("expected '%s' but got '%s'", expected, got)
+	}
+
+	pfs = make(wkhtmltox.PDFFlagSet)
+	pfs["grayscale"] = true
+	expected = []string{"--grayscale"}
+	got = pfs.Flags()
+	if !reflect.DeepEqual(expected, got) {
+		t.Fatalf("expected '%s' but got '%s'", expected, got)
+	}
+
+	pfs = make(wkhtmltox.PDFFlagSet)
+	pfs["grayscale"] = false
+	got = pfs.Flags()
+	if len(got) != 0 {
+		t.Fatalf("expected '%s' but got '%s'", expected, got)
+	}
+
+	pfs = make(wkhtmltox.PDFFlagSet)
+	pfs["images"] = true
+	expected = []string{"--images"}
+	got = pfs.Flags()
+	if !reflect.DeepEqual(expected, got) {
+		t.Fatalf("expected '%s' but got '%s'", expected, got)
+	}
+
+	pfs = make(wkhtmltox.PDFFlagSet)
+	pfs["images"] = false
+	expected = []string{"--no-images"}
+	got = pfs.Flags()
+	if !reflect.DeepEqual(expected, got) {
+		t.Fatalf("expected '%s' but got '%s'", expected, got)
+	}
+
+	pfs = make(wkhtmltox.PDFFlagSet)
+	pfs["image-dpi"] = 600
+	expected = []string{"--image-dpi", "600"}
+	got = pfs.Flags()
+	if !reflect.DeepEqual(expected, got) {
+		t.Fatalf("expected '%s' but got '%s'", expected, got)
+	}
+
+	pfs = make(wkhtmltox.PDFFlagSet)
+	pfs["image-quality"] = 94
+	expected = []string{"--image-quality", "94"}
+	got = pfs.Flags()
+	if !reflect.DeepEqual(expected, got) {
+		t.Fatalf("expected '%s' but got '%s'", expected, got)
+	}
+
+	pfs = make(wkhtmltox.PDFFlagSet)
+	pfs["internal-links"] = false
+	expected = []string{"--disable-internal-links"}
+	got = pfs.Flags()
+	if !reflect.DeepEqual(expected, got) {
+		t.Fatalf("expected '%s' but got '%s'", expected, got)
+	}
+
+	pfs = make(wkhtmltox.PDFFlagSet)
+	pfs["internal-links"] = true
+	expected = []string{"--enable-internal-links"}
+	got = pfs.Flags()
+	if !reflect.DeepEqual(expected, got) {
+		t.Fatalf("expected '%s' but got '%s'", expected, got)
+	}
+
+	pfs = make(wkhtmltox.PDFFlagSet)
+	pfs["javascript"] = false
+	expected = []string{"--disable-javascript"}
+	got = pfs.Flags()
+	if !reflect.DeepEqual(expected, got) {
+		t.Fatalf("expected '%s' but got '%s'", expected, got)
+	}
+
+	pfs = make(wkhtmltox.PDFFlagSet)
+	pfs["javascript"] = true
+	expected = []string{"--enable-javascript"}
+	got = pfs.Flags()
+	if !reflect.DeepEqual(expected, got) {
+		t.Fatalf("expected '%s' but got '%s'", expected, got)
+	}
+
+	pfs = make(wkhtmltox.PDFFlagSet)
+	pfs["javascript-delay"] = 200
+	expected = []string{"--javascript-delay", "200"}
+	got = pfs.Flags()
+	if !reflect.DeepEqual(expected, got) {
+		t.Fatalf("expected '%s' but got '%s'", expected, got)
+	}
+
+	pfs = make(wkhtmltox.PDFFlagSet)
+	pfs["load-error-handling"] = "abort"
+	expected = []string{"--load-error-handling", "abort"}
+	got = pfs.Flags()
+	if !reflect.DeepEqual(expected, got) {
+		t.Fatalf("expected '%s' but got '%s'", expected, got)
+	}
+
+	pfs = make(wkhtmltox.PDFFlagSet)
+	pfs["load-media-error-handling"] = "abort"
+	expected = []string{"--load-media-error-handling", "abort"}
+	got = pfs.Flags()
+	if !reflect.DeepEqual(expected, got) {
+		t.Fatalf("expected '%s' but got '%s'", expected, got)
+	}
+
+	pfs = make(wkhtmltox.PDFFlagSet)
+	pfs["lowquality"] = true
+	expected = []string{"--lowquality"}
+	got = pfs.Flags()
+	if !reflect.DeepEqual(expected, got) {
+		t.Fatalf("expected '%s' but got '%s'", expected, got)
+	}
+
+	pfs = make(wkhtmltox.PDFFlagSet)
+	pfs["lowquality"] = false
+	got = pfs.Flags()
+	if len(got) != 0 {
+		t.Fatalf("expected '%s' but got '%s'", expected, got)
+	}
+
+	pfs = make(wkhtmltox.PDFFlagSet)
+	pfs["margin-bottom"] = 10
+	expected = []string{"--margin-bottom", "10"}
+	got = pfs.Flags()
+	if !reflect.DeepEqual(expected, got) {
+		t.Fatalf("expected '%s' but got '%s'", expected, got)
+	}
+
+	pfs = make(wkhtmltox.PDFFlagSet)
+	pfs["margin-left"] = 10
+	expected = []string{"--margin-left", "10"}
+	got = pfs.Flags()
+	if !reflect.DeepEqual(expected, got) {
+		t.Fatalf("expected '%s' but got '%s'", expected, got)
+	}
+
+	pfs = make(wkhtmltox.PDFFlagSet)
+	pfs["margin-right"] = 10
+	expected = []string{"--margin-right", "10"}
+	got = pfs.Flags()
+	if !reflect.DeepEqual(expected, got) {
+		t.Fatalf("expected '%s' but got '%s'", expected, got)
+	}
+
+	pfs = make(wkhtmltox.PDFFlagSet)
+	pfs["margin-top"] = 10
+	expected = []string{"--margin-top", "10"}
+	got = pfs.Flags()
+	if !reflect.DeepEqual(expected, got) {
+		t.Fatalf("expected '%s' but got '%s'", expected, got)
+	}
+
+	pfs = make(wkhtmltox.PDFFlagSet)
+	pfs["minimum-font-size"] = 10
+	expected = []string{"--minimum-font-size", "10"}
+	got = pfs.Flags()
+	if !reflect.DeepEqual(expected, got) {
+		t.Fatalf("expected '%s' but got '%s'", expected, got)
+	}
+
+	pfs = make(wkhtmltox.PDFFlagSet)
+	pfs["orientation"] = "landscape"
+	expected = []string{"--orientation", "landscape"}
+	got = pfs.Flags()
+	if !reflect.DeepEqual(expected, got) {
+		t.Fatalf("expected '%s' but got '%s'", expected, got)
+	}
+
+	pfs = make(wkhtmltox.PDFFlagSet)
+	pfs["page-height"] = 10
+	expected = []string{"--page-height", "10"}
+	got = pfs.Flags()
+	if !reflect.DeepEqual(expected, got) {
+		t.Fatalf("expected '%s' but got '%s'", expected, got)
+	}
+
+	pfs = make(wkhtmltox.PDFFlagSet)
+	pfs["page-size"] = "A4"
+	expected = []string{"--page-size", "A4"}
+	got = pfs.Flags()
+	if !reflect.DeepEqual(expected, got) {
+		t.Fatalf("expected '%s' but got '%s'", expected, got)
+	}
+
+	pfs = make(wkhtmltox.PDFFlagSet)
+	pfs["page-width"] = 10
+	expected = []string{"--page-width", "10"}
+	got = pfs.Flags()
+	if !reflect.DeepEqual(expected, got) {
+		t.Fatalf("expected '%s' but got '%s'", expected, got)
+	}
+
+	pfs = make(wkhtmltox.PDFFlagSet)
+	pfs["no-pdf-compression"] = true
+	expected = []string{"--no-pdf-compression"}
+	got = pfs.Flags()
+	if !reflect.DeepEqual(expected, got) {
+		t.Fatalf("expected '%s' but got '%s'", expected, got)
+	}
+
+	pfs = make(wkhtmltox.PDFFlagSet)
+	pfs["no-pdf-compression"] = false
+	expected = []string{"--no-pdf-compression"}
+	got = pfs.Flags()
+	if len(got) != 0 {
+		t.Fatalf("expected '%s' but got '%s'", expected, got)
+	}
+
+	pfs = make(wkhtmltox.PDFFlagSet)
+	pfs["password"] = "sekret"
+	expected = []string{"--password", "sekret"}
+	got = pfs.Flags()
+	if !reflect.DeepEqual(expected, got) {
+		t.Fatalf("expected '%s' but got '%s'", expected, got)
+	}
+
+	pfs = make(wkhtmltox.PDFFlagSet)
+	pfs["smart-shrinking"] = false
+	expected = []string{"--disable-smart-shrinking"}
+	got = pfs.Flags()
+	if !reflect.DeepEqual(expected, got) {
+		t.Fatalf("expected '%s' but got '%s'", expected, got)
+	}
+
+	pfs = make(wkhtmltox.PDFFlagSet)
+	pfs["smart-shrinking"] = true
+	expected = []string{"--enable-smart-shrinking"}
+	got = pfs.Flags()
+	if !reflect.DeepEqual(expected, got) {
+		t.Fatalf("expected '%s' but got '%s'", expected, got)
+	}
+
+	pfs = make(wkhtmltox.PDFFlagSet)
+	pfs["stop-slow-scripts"] = true
+	expected = []string{"--stop-slow-scripts"}
+	got = pfs.Flags()
+	if !reflect.DeepEqual(expected, got) {
+		t.Fatalf("expected '%s' but got '%s'", expected, got)
+	}
+
+	pfs = make(wkhtmltox.PDFFlagSet)
+	pfs["stop-slow-scripts"] = false
+	expected = []string{"--no-stop-slow-scripts"}
+	got = pfs.Flags()
+	if !reflect.DeepEqual(expected, got) {
+		t.Fatalf("expected '%s' but got '%s'", expected, got)
+	}
+
+	pfs = make(wkhtmltox.PDFFlagSet)
+	pfs["title"] = "Some Title"
+	expected = []string{"--title", "Some Title"}
+	got = pfs.Flags()
+	if !reflect.DeepEqual(expected, got) {
+		t.Fatalf("expected '%s' but got '%s'", expected, got)
+	}
+
+	pfs = make(wkhtmltox.PDFFlagSet)
+	pfs["use-xserver"] = true
+	expected = []string{"--use-xserver"}
+	got = pfs.Flags()
+	if !reflect.DeepEqual(expected, got) {
+		t.Fatalf("expected '%s' but got '%s'", expected, got)
+	}
+
+	pfs = make(wkhtmltox.PDFFlagSet)
+	pfs["use-xserver"] = false
+	got = pfs.Flags()
+	if len(got) != 0 {
+		t.Fatalf("expected '%s' but got '%s'", expected, got)
+	}
+
+	pfs = make(wkhtmltox.PDFFlagSet)
+	pfs["username"] = "some_name"
+	expected = []string{"--username", "some_name"}
+	got = pfs.Flags()
+	if !reflect.DeepEqual(expected, got) {
+		t.Fatalf("expected '%s' but got '%s'", expected, got)
+	}
+
+	pfs = make(wkhtmltox.PDFFlagSet)
+	pfs["zoom"] = 0.5
+	expected = []string{"--zoom", "0.5"}
+	got = pfs.Flags()
 	if !reflect.DeepEqual(expected, got) {
 		t.Fatalf("expected '%s' but got '%s'", expected, got)
 	}

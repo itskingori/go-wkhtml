@@ -30,3 +30,13 @@ type HeaderSet struct {
 	Name  string `json:"name,omitempty"`
 	Value string `json:"value,omitempty"`
 }
+
+func checkStringSliceContains(ss []string, str string) bool {
+	for _, v := range ss {
+		if v == str {
+			return true
+		}
+	}
+
+	return false
+}

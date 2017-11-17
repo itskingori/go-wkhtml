@@ -225,7 +225,73 @@ func (pfs *PDFFlagSet) Flags() []string {
 	var flags []string
 
 	for flagKey, flagValue := range *pfs {
-		flags = append(flags, fmt.Sprintf("--%s", flagKey), fmt.Sprintf("%v", flagValue))
+		switch flagValue.(type) {
+		case int:
+			flags = append(flags, fmt.Sprintf("--%s", flagKey), fmt.Sprintf("%d", flagValue))
+		case string:
+			flags = append(flags, fmt.Sprintf("--%s", flagKey), fmt.Sprintf("%s", flagValue))
+		case float64:
+			flags = append(flags, fmt.Sprintf("--%s", flagKey), fmt.Sprintf("%v", flagValue))
+		case []string:
+			for _, flagValueChild := range flagValue.([]string) {
+				flags = append(flags, fmt.Sprintf("--%s", flagKey), fmt.Sprintf("%s", flagValueChild))
+			}
+		case []CookieSet:
+			for _, cs := range flagValue.([]CookieSet) {
+				flags = append(flags, fmt.Sprintf("--%s", flagKey), cs.Name, cs.Value)
+			}
+		case []HeaderSet:
+			for _, hs := range flagValue.([]HeaderSet) {
+				flags = append(flags, fmt.Sprintf("--%s", flagKey), hs.Name, hs.Value)
+			}
+		case bool:
+			// Positive --XXX, Negative --no-XXX
+			type1Flags := []string{
+				"custom-header-propagation",
+				"debug-javascript",
+				"images",
+				"stop-slow-scripts",
+			}
+
+			// Positive --enable-XXX, Negative --disable-XXX
+			type2Flags := []string{
+				"external-links",
+				"forms",
+				"internal-links",
+				"javascript",
+				"smart-shrinking",
+			}
+
+			// Positive --XXX, Negative (absent)
+			type3Flags := []string{
+				"grayscale",
+				"lowquality",
+				"no-pdf-compression",
+				"use-xserver",
+			}
+
+			if checkStringSliceContains(type1Flags, flagKey) {
+				if flagValue.(bool) {
+					flags = append(flags, fmt.Sprintf("--%s", flagKey))
+				} else {
+					flags = append(flags, fmt.Sprintf("--no-%s", flagKey))
+				}
+			}
+
+			if checkStringSliceContains(type2Flags, flagKey) {
+				if flagValue.(bool) {
+					flags = append(flags, fmt.Sprintf("--enable-%s", flagKey))
+				} else {
+					flags = append(flags, fmt.Sprintf("--disable-%s", flagKey))
+				}
+			}
+
+			if checkStringSliceContains(type3Flags, flagKey) {
+				if flagValue.(bool) {
+					flags = append(flags, fmt.Sprintf("--%s", flagKey))
+				}
+			}
+		}
 	}
 
 	return flags

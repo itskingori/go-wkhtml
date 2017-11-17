@@ -19,7 +19,6 @@ package wkhtmltox_test
 
 import (
 	"reflect"
-	"sort"
 	"testing"
 
 	"github.com/itskingori/go-wkhtml/wkhtmltox"
@@ -45,19 +44,302 @@ func TestImageNewImageFlagSetFromOptions(t *testing.T) {
 }
 
 func TestImageFlagSetFlags(t *testing.T) {
-	fss := make(wkhtmltox.ImageFlagSet)
-	fss["crop-h"] = 10
-	fss["format"] = "png"
-
-	expected := []string{"--crop-h", "10", "--format", "png"}
-	got := fss.Flags()
-
-	sort.Strings(expected)
-	sort.Strings(got)
-
+	ifs := make(wkhtmltox.ImageFlagSet)
+	ifs["cache-dir"] = "/some/dir"
+	expected := []string{"--cache-dir", "/some/dir"}
+	got := ifs.Flags()
 	if !reflect.DeepEqual(expected, got) {
 		t.Fatalf("expected '%s' but got '%s'", expected, got)
 	}
+
+	ifs = make(wkhtmltox.ImageFlagSet)
+	ifs["cookie"] = []wkhtmltox.CookieSet{
+		wkhtmltox.CookieSet{
+			Name:  "cookie1",
+			Value: "value1",
+		},
+		wkhtmltox.CookieSet{
+			Name:  "cookie2",
+			Value: "value2",
+		},
+	}
+	expected = []string{"--cookie", "cookie1", "value1", "--cookie", "cookie2", "value2"}
+	got = ifs.Flags()
+	if !reflect.DeepEqual(expected, got) {
+		t.Fatalf("expected '%s' but got '%s'", expected, got)
+	}
+
+	ifs = make(wkhtmltox.ImageFlagSet)
+	ifs["crop-h"] = 10
+	expected = []string{"--crop-h", "10"}
+	got = ifs.Flags()
+	if !reflect.DeepEqual(expected, got) {
+		t.Fatalf("expected '%s' but got '%s'", expected, got)
+	}
+
+	ifs = make(wkhtmltox.ImageFlagSet)
+	ifs["crop-w"] = 10
+	expected = []string{"--crop-w", "10"}
+	got = ifs.Flags()
+	if !reflect.DeepEqual(expected, got) {
+		t.Fatalf("expected '%s' but got '%s'", expected, got)
+	}
+
+	ifs = make(wkhtmltox.ImageFlagSet)
+	ifs["crop-x"] = 10
+	expected = []string{"--crop-x", "10"}
+	got = ifs.Flags()
+	if !reflect.DeepEqual(expected, got) {
+		t.Fatalf("expected '%s' but got '%s'", expected, got)
+	}
+
+	ifs = make(wkhtmltox.ImageFlagSet)
+	ifs["crop-y"] = 10
+	expected = []string{"--crop-y", "10"}
+	got = ifs.Flags()
+	if !reflect.DeepEqual(expected, got) {
+		t.Fatalf("expected '%s' but got '%s'", expected, got)
+	}
+
+	ifs = make(wkhtmltox.ImageFlagSet)
+	ifs["custom-header"] = []wkhtmltox.HeaderSet{
+		wkhtmltox.HeaderSet{
+			Name:  "header1",
+			Value: "value1",
+		},
+		wkhtmltox.HeaderSet{
+			Name:  "header2",
+			Value: "value2",
+		},
+	}
+	expected = []string{"--custom-header", "header1", "value1", "--custom-header", "header2", "value2"}
+	got = ifs.Flags()
+	if !reflect.DeepEqual(expected, got) {
+		t.Fatalf("expected '%s' but got '%s'", expected, got)
+	}
+
+	ifs = make(wkhtmltox.ImageFlagSet)
+	ifs["custom-header-propagation"] = true
+	expected = []string{"--custom-header-propagation"}
+	got = ifs.Flags()
+	if !reflect.DeepEqual(expected, got) {
+		t.Fatalf("expected '%s' but got '%s'", expected, got)
+	}
+
+	ifs = make(wkhtmltox.ImageFlagSet)
+	ifs["custom-header-propagation"] = false
+	expected = []string{"--no-custom-header-propagation"}
+	got = ifs.Flags()
+	if !reflect.DeepEqual(expected, got) {
+		t.Fatalf("expected '%s' but got '%s'", expected, got)
+	}
+
+	ifs = make(wkhtmltox.ImageFlagSet)
+	ifs["debug-javascript"] = true
+	expected = []string{"--debug-javascript"}
+	got = ifs.Flags()
+	if !reflect.DeepEqual(expected, got) {
+		t.Fatalf("expected '%s' but got '%s'", expected, got)
+	}
+
+	ifs = make(wkhtmltox.ImageFlagSet)
+	ifs["debug-javascript"] = false
+	expected = []string{"--no-debug-javascript"}
+	got = ifs.Flags()
+	if !reflect.DeepEqual(expected, got) {
+		t.Fatalf("expected '%s' but got '%s'", expected, got)
+	}
+
+	ifs = make(wkhtmltox.ImageFlagSet)
+	ifs["encoding"] = "utf-8"
+	expected = []string{"--encoding", "utf-8"}
+	got = ifs.Flags()
+	if !reflect.DeepEqual(expected, got) {
+		t.Fatalf("expected '%s' but got '%s'", expected, got)
+	}
+
+	ifs = make(wkhtmltox.ImageFlagSet)
+	ifs["format"] = "png"
+	expected = []string{"--format", "png"}
+	got = ifs.Flags()
+	if !reflect.DeepEqual(expected, got) {
+		t.Fatalf("expected '%s' but got '%s'", expected, got)
+	}
+
+	ifs = make(wkhtmltox.ImageFlagSet)
+	ifs["height"] = 10
+	expected = []string{"--height", "10"}
+	got = ifs.Flags()
+	if !reflect.DeepEqual(expected, got) {
+		t.Fatalf("expected '%s' but got '%s'", expected, got)
+	}
+
+	ifs = make(wkhtmltox.ImageFlagSet)
+	ifs["images"] = true
+	expected = []string{"--images"}
+	got = ifs.Flags()
+	if !reflect.DeepEqual(expected, got) {
+		t.Fatalf("expected '%s' but got '%s'", expected, got)
+	}
+
+	ifs = make(wkhtmltox.ImageFlagSet)
+	ifs["images"] = false
+	expected = []string{"--no-images"}
+	got = ifs.Flags()
+	if !reflect.DeepEqual(expected, got) {
+		t.Fatalf("expected '%s' but got '%s'", expected, got)
+	}
+
+	ifs = make(wkhtmltox.ImageFlagSet)
+	ifs["javascript"] = false
+	expected = []string{"--disable-javascript"}
+	got = ifs.Flags()
+	if !reflect.DeepEqual(expected, got) {
+		t.Fatalf("expected '%s' but got '%s'", expected, got)
+	}
+
+	ifs = make(wkhtmltox.ImageFlagSet)
+	ifs["javascript"] = true
+	expected = []string{"--enable-javascript"}
+	got = ifs.Flags()
+	if !reflect.DeepEqual(expected, got) {
+		t.Fatalf("expected '%s' but got '%s'", expected, got)
+	}
+
+	ifs = make(wkhtmltox.ImageFlagSet)
+	ifs["javascript-delay"] = 200
+	expected = []string{"--javascript-delay", "200"}
+	got = ifs.Flags()
+	if !reflect.DeepEqual(expected, got) {
+		t.Fatalf("expected '%s' but got '%s'", expected, got)
+	}
+
+	ifs = make(wkhtmltox.ImageFlagSet)
+	ifs["load-error-handling"] = "abort"
+	expected = []string{"--load-error-handling", "abort"}
+	got = ifs.Flags()
+	if !reflect.DeepEqual(expected, got) {
+		t.Fatalf("expected '%s' but got '%s'", expected, got)
+	}
+
+	ifs = make(wkhtmltox.ImageFlagSet)
+	ifs["load-media-error-handling"] = "abort"
+	expected = []string{"--load-media-error-handling", "abort"}
+	got = ifs.Flags()
+	if !reflect.DeepEqual(expected, got) {
+		t.Fatalf("expected '%s' but got '%s'", expected, got)
+	}
+
+	ifs = make(wkhtmltox.ImageFlagSet)
+	ifs["minimum-font-size"] = 10
+	expected = []string{"--minimum-font-size", "10"}
+	got = ifs.Flags()
+	if !reflect.DeepEqual(expected, got) {
+		t.Fatalf("expected '%s' but got '%s'", expected, got)
+	}
+
+	ifs = make(wkhtmltox.ImageFlagSet)
+	ifs["password"] = "sekret"
+	expected = []string{"--password", "sekret"}
+	got = ifs.Flags()
+	if !reflect.DeepEqual(expected, got) {
+		t.Fatalf("expected '%s' but got '%s'", expected, got)
+	}
+
+	ifs = make(wkhtmltox.ImageFlagSet)
+	ifs["quality"] = 94
+	expected = []string{"--quality", "94"}
+	got = ifs.Flags()
+	if !reflect.DeepEqual(expected, got) {
+		t.Fatalf("expected '%s' but got '%s'", expected, got)
+	}
+
+	ifs = make(wkhtmltox.ImageFlagSet)
+	ifs["smart-width"] = false
+	expected = []string{"--disable-smart-width"}
+	got = ifs.Flags()
+	if !reflect.DeepEqual(expected, got) {
+		t.Fatalf("expected '%s' but got '%s'", expected, got)
+	}
+
+	ifs = make(wkhtmltox.ImageFlagSet)
+	ifs["smart-width"] = true
+	expected = []string{"--enable-smart-width"}
+	got = ifs.Flags()
+	if !reflect.DeepEqual(expected, got) {
+		t.Fatalf("expected '%s' but got '%s'", expected, got)
+	}
+
+	ifs = make(wkhtmltox.ImageFlagSet)
+	ifs["stop-slow-scripts"] = true
+	expected = []string{"--stop-slow-scripts"}
+	got = ifs.Flags()
+	if !reflect.DeepEqual(expected, got) {
+		t.Fatalf("expected '%s' but got '%s'", expected, got)
+	}
+
+	ifs = make(wkhtmltox.ImageFlagSet)
+	ifs["stop-slow-scripts"] = false
+	expected = []string{"--no-stop-slow-scripts"}
+	got = ifs.Flags()
+	if !reflect.DeepEqual(expected, got) {
+		t.Fatalf("expected '%s' but got '%s'", expected, got)
+	}
+
+	ifs = make(wkhtmltox.ImageFlagSet)
+	ifs["transparent"] = true
+	expected = []string{"--transparent"}
+	got = ifs.Flags()
+	if !reflect.DeepEqual(expected, got) {
+		t.Fatalf("expected '%s' but got '%s'", expected, got)
+	}
+
+	ifs = make(wkhtmltox.ImageFlagSet)
+	ifs["transparent"] = false
+	got = ifs.Flags()
+	if len(got) != 0 {
+		t.Fatalf("expected '%s' but got '%s'", expected, got)
+	}
+
+	ifs = make(wkhtmltox.ImageFlagSet)
+	ifs["use-xserver"] = true
+	expected = []string{"--use-xserver"}
+	got = ifs.Flags()
+	if !reflect.DeepEqual(expected, got) {
+		t.Fatalf("expected '%s' but got '%s'", expected, got)
+	}
+
+	ifs = make(wkhtmltox.ImageFlagSet)
+	ifs["use-xserver"] = false
+	got = ifs.Flags()
+	if len(got) != 0 {
+		t.Fatalf("expected '%s' but got '%s'", expected, got)
+	}
+
+	ifs = make(wkhtmltox.ImageFlagSet)
+	ifs["username"] = "sekret"
+	expected = []string{"--username", "sekret"}
+	got = ifs.Flags()
+	if !reflect.DeepEqual(expected, got) {
+		t.Fatalf("expected '%s' but got '%s'", expected, got)
+	}
+
+	ifs = make(wkhtmltox.ImageFlagSet)
+	ifs["width"] = 10
+	expected = []string{"--width", "10"}
+	got = ifs.Flags()
+	if !reflect.DeepEqual(expected, got) {
+		t.Fatalf("expected '%s' but got '%s'", expected, got)
+	}
+
+	ifs = make(wkhtmltox.ImageFlagSet)
+	ifs["zoom"] = 0.5
+	expected = []string{"--zoom", "0.5"}
+	got = ifs.Flags()
+	if !reflect.DeepEqual(expected, got) {
+		t.Fatalf("expected '%s' but got '%s'", expected, got)
+	}
+
 }
 
 func TestImageFlagSetGetCacheDir(t *testing.T) {
