@@ -233,23 +233,23 @@ func (pfs *PDFFlagSet) Flags() []string {
 
 // GetCacheDir retrieves the CacheDir from a PDFFlagSet
 func (pfs *PDFFlagSet) GetCacheDir() (string, bool) {
-	value, exists := (*pfs)["cache-dir"]
+	dir, exists := (*pfs)["cache-dir"]
 
-	return value.(string), exists
+	return dir.(string), exists
 }
 
 // GetCookie retrieves the Cookie from a PDFFlagSet
 func (pfs *PDFFlagSet) GetCookie() ([]CookieSet, bool) {
-	value, exists := (*pfs)["cookie"]
+	cookies, exists := (*pfs)["cookie"]
 
-	return value.([]CookieSet), exists
+	return cookies.([]CookieSet), exists
 }
 
 // GetCustomHeader retrieves the CustomHeader from a PDFFlagSet
 func (pfs *PDFFlagSet) GetCustomHeader() ([]HeaderSet, bool) {
-	value, exists := (*pfs)["custom-header"]
+	headers, exists := (*pfs)["custom-header"]
 
-	return value.([]HeaderSet), exists
+	return headers.([]HeaderSet), exists
 }
 
 // GetCustomHeaderPropagation retrieves the CustomHeaderPropagation from a PDFFlagSet
@@ -268,16 +268,16 @@ func (pfs *PDFFlagSet) GetDebugJavascript() (bool, bool) {
 
 // GetDPI retrieves the DPI from a PDFFlagSet
 func (pfs *PDFFlagSet) GetDPI() (int, bool) {
-	value, exists := (*pfs)["dpi"]
+	dpi, exists := (*pfs)["dpi"]
 
-	return value.(int), exists
+	return dpi.(int), exists
 }
 
 // GetEncoding retrieves the Encoding from a PDFFlagSet
 func (pfs *PDFFlagSet) GetEncoding() (string, bool) {
-	value, exists := (*pfs)["encoding"]
+	encoding, exists := (*pfs)["encoding"]
 
-	return value.(string), exists
+	return encoding.(string), exists
 }
 
 // GetExternalLinks retrieves the ExternalLinks from a PDFFlagSet
@@ -310,16 +310,16 @@ func (pfs *PDFFlagSet) GetImages() (bool, bool) {
 
 // GetImageDPI retrieves the ImageDPI from a PDFFlagSet
 func (pfs *PDFFlagSet) GetImageDPI() (int, bool) {
-	value, exists := (*pfs)["image-dpi"]
+	dpi, exists := (*pfs)["image-dpi"]
 
-	return value.(int), exists
+	return dpi.(int), exists
 }
 
 // GetImageQuality retrieves the ImageQuality from a PDFFlagSet
 func (pfs *PDFFlagSet) GetImageQuality() (int, bool) {
-	value, exists := (*pfs)["image-quality"]
+	quality, exists := (*pfs)["image-quality"]
 
-	return value.(int), exists
+	return quality.(int), exists
 }
 
 // GetInternalLinks retrieves the InternalLinks from a PDFFlagSet
@@ -338,23 +338,23 @@ func (pfs *PDFFlagSet) GetJavascript() (bool, bool) {
 
 // GetJavascriptDelay retrieves the JavascriptDelay from a PDFFlagSet
 func (pfs *PDFFlagSet) GetJavascriptDelay() (int, bool) {
-	value, exists := (*pfs)["javascript-delay"]
+	milliseconds, exists := (*pfs)["javascript-delay"]
 
-	return value.(int), exists
+	return milliseconds.(int), exists
 }
 
 // GetLoadErrorHandling retrieves the LoadErrorHandling from a PDFFlagSet
 func (pfs *PDFFlagSet) GetLoadErrorHandling() (string, bool) {
-	value, exists := (*pfs)["load-error-handling"]
+	handling, exists := (*pfs)["load-error-handling"]
 
-	return value.(string), exists
+	return handling.(string), exists
 }
 
 // GetLoadMediaErrorHandling retrieves the LoadMediaErrorHandling from a PDFFlagSet
 func (pfs *PDFFlagSet) GetLoadMediaErrorHandling() (string, bool) {
-	value, exists := (*pfs)["load-media-error-handling"]
+	handling, exists := (*pfs)["load-media-error-handling"]
 
-	return value.(string), exists
+	return handling.(string), exists
 }
 
 // GetLowQuality retrieves the LowQuality from a PDFFlagSet
@@ -366,37 +366,37 @@ func (pfs *PDFFlagSet) GetLowQuality() (bool, bool) {
 
 // GetMarginBottom retrieves the MarginBottom from a PDFFlagSet
 func (pfs *PDFFlagSet) GetMarginBottom() (int, bool) {
-	value, exists := (*pfs)["margin-bottom"]
+	millimetres, exists := (*pfs)["margin-bottom"]
 
-	return value.(int), exists
+	return millimetres.(int), exists
 }
 
 // GetMarginLeft retrieves the MarginLeft from a PDFFlagSet
 func (pfs *PDFFlagSet) GetMarginLeft() (int, bool) {
-	value, exists := (*pfs)["margin-left"]
+	millimetres, exists := (*pfs)["margin-left"]
 
-	return value.(int), exists
+	return millimetres.(int), exists
 }
 
 // GetMarginRight retrieves the MarginRight from a PDFFlagSet
 func (pfs *PDFFlagSet) GetMarginRight() (int, bool) {
-	value, exists := (*pfs)["margin-right"]
+	millimetres, exists := (*pfs)["margin-right"]
 
-	return value.(int), exists
+	return millimetres.(int), exists
 }
 
 // GetMarginTop retrieves the MarginTop from a PDFFlagSet
 func (pfs *PDFFlagSet) GetMarginTop() (int, bool) {
-	value, exists := (*pfs)["margin-top"]
+	millimetres, exists := (*pfs)["margin-top"]
 
-	return value.(int), exists
+	return millimetres.(int), exists
 }
 
 // GetMinimumFontSize retrieves the MinimumFontSize from a PDFFlagSet
 func (pfs *PDFFlagSet) GetMinimumFontSize() (int, bool) {
-	value, exists := (*pfs)["minimum-font-size"]
+	size, exists := (*pfs)["minimum-font-size"]
 
-	return value.(int), exists
+	return size.(int), exists
 }
 
 // GetNoPDFCompression retrieves the NoPDFCompression from a PDFFlagSet
@@ -408,37 +408,37 @@ func (pfs *PDFFlagSet) GetNoPDFCompression() (bool, bool) {
 
 // GetOrientation retrieves the Orientation from a PDFFlagSet
 func (pfs *PDFFlagSet) GetOrientation() (string, bool) {
-	value, exists := (*pfs)["orientation"]
+	orientation, exists := (*pfs)["orientation"]
 
-	return value.(string), exists
+	return orientation.(string), exists
 }
 
 // GetPageHeight retrieves the PageHeight from a PDFFlagSet
 func (pfs *PDFFlagSet) GetPageHeight() (int, bool) {
-	value, exists := (*pfs)["page-height"]
+	height, exists := (*pfs)["page-height"]
 
-	return value.(int), exists
+	return height.(int), exists
 }
 
 // GetPageSize retrieves the PageSize from a PDFFlagSet
 func (pfs *PDFFlagSet) GetPageSize() (string, bool) {
-	value, exists := (*pfs)["page-size"]
+	size, exists := (*pfs)["page-size"]
 
-	return value.(string), exists
+	return size.(string), exists
 }
 
 // GetPageWidth retrieves the PageWidth from a PDFFlagSet
 func (pfs *PDFFlagSet) GetPageWidth() (int, bool) {
-	value, exists := (*pfs)["page-width"]
+	width, exists := (*pfs)["page-width"]
 
-	return value.(int), exists
+	return width.(int), exists
 }
 
 // GetPassword retrieves the Password from a PDFFlagSet
 func (pfs *PDFFlagSet) GetPassword() (string, bool) {
-	value, exists := (*pfs)["password"]
+	password, exists := (*pfs)["password"]
 
-	return value.(string), exists
+	return password.(string), exists
 }
 
 // GetSmartShrinking retrieves the SmartShrinking from a PDFFlagSet
@@ -457,9 +457,9 @@ func (pfs *PDFFlagSet) GetStopSlowScripts() (bool, bool) {
 
 // GetTitle retrieves the Title from a PDFFlagSet
 func (pfs *PDFFlagSet) GetTitle() (string, bool) {
-	value, exists := (*pfs)["title"]
+	title, exists := (*pfs)["title"]
 
-	return value.(string), exists
+	return title.(string), exists
 }
 
 // GetUseXServer retrieves the UseXServer from a PDFFlagSet
@@ -471,16 +471,16 @@ func (pfs *PDFFlagSet) GetUseXServer() (bool, bool) {
 
 // GetUsername retrieves the Username from a PDFFlagSet
 func (pfs *PDFFlagSet) GetUsername() (string, bool) {
-	value, exists := (*pfs)["username"]
+	username, exists := (*pfs)["username"]
 
-	return value.(string), exists
+	return username.(string), exists
 }
 
 // GetZoom retrieves the Zoom from a PDFFlagSet
 func (pfs *PDFFlagSet) GetZoom() (float64, bool) {
-	value, exists := (*pfs)["zoom"]
+	zoom, exists := (*pfs)["zoom"]
 
-	return value.(float64), exists
+	return zoom.(float64), exists
 }
 
 // SetCacheDir sets the CacheDir of a PDFFlagSet
