@@ -17,5 +17,26 @@
 
 package wkhtmltox
 
-// FlagSet represents key-value pair of flags
-type FlagSet map[string]interface{}
+type flagSet map[string]interface{}
+
+// CookieSet represents cookie name and value
+type CookieSet struct {
+	Name  string `json:"name,omitempty"`
+	Value string `json:"value,omitempty"`
+}
+
+// HeaderSet represents header name and value
+type HeaderSet struct {
+	Name  string `json:"name,omitempty"`
+	Value string `json:"value,omitempty"`
+}
+
+func checkStringSliceContains(ss []string, str string) bool {
+	for _, v := range ss {
+		if v == str {
+			return true
+		}
+	}
+
+	return false
+}
