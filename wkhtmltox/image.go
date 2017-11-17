@@ -18,7 +18,6 @@
 package wkhtmltox
 
 import (
-	"fmt"
 	"os/exec"
 )
 
@@ -182,23 +181,17 @@ func (ifs *ImageFlagSet) Flags() []string {
 	for flagKey, flagValue := range *ifs {
 		switch flagValue.(type) {
 		case int:
-			flags = append(flags, fmt.Sprintf("--%s", flagKey), fmt.Sprintf("%d", flagValue))
+			evaluateIntFlag(&flags, flagKey, flagValue.(int))
 		case string:
-			flags = append(flags, fmt.Sprintf("--%s", flagKey), fmt.Sprintf("%s", flagValue))
+			evaluateStringFlag(&flags, flagKey, flagValue.(string))
 		case float64:
-			flags = append(flags, fmt.Sprintf("--%s", flagKey), fmt.Sprintf("%v", flagValue))
+			evaluateFloat64Flag(&flags, flagKey, flagValue.(float64))
 		case []string:
-			for _, flagValueChild := range flagValue.([]string) {
-				flags = append(flags, fmt.Sprintf("--%s", flagKey), fmt.Sprintf("%s", flagValueChild))
-			}
+			evaluateStringSliceFlag(&flags, flagKey, flagValue.([]string))
 		case []CookieSet:
-			for _, cs := range flagValue.([]CookieSet) {
-				flags = append(flags, fmt.Sprintf("--%s", flagKey), cs.Name, cs.Value)
-			}
+			evaluateCookieSetSliceFlag(&flags, flagKey, flagValue.([]CookieSet))
 		case []HeaderSet:
-			for _, hs := range flagValue.([]HeaderSet) {
-				flags = append(flags, fmt.Sprintf("--%s", flagKey), hs.Name, hs.Value)
-			}
+			evaluateHeaderSetSliceFlag(&flags, flagKey, flagValue.([]HeaderSet))
 		case bool:
 			// Positive --XXX, Negative --no-XXX
 			type1Flags := []string{
@@ -221,25 +214,15 @@ func (ifs *ImageFlagSet) Flags() []string {
 			}
 
 			if checkStringSliceContains(type1Flags, flagKey) {
-				if flagValue.(bool) {
-					flags = append(flags, fmt.Sprintf("--%s", flagKey))
-				} else {
-					flags = append(flags, fmt.Sprintf("--no-%s", flagKey))
-				}
+				evaluateBoolType1Flag(&flags, flagKey, flagValue.(bool))
 			}
 
 			if checkStringSliceContains(type2Flags, flagKey) {
-				if flagValue.(bool) {
-					flags = append(flags, fmt.Sprintf("--enable-%s", flagKey))
-				} else {
-					flags = append(flags, fmt.Sprintf("--disable-%s", flagKey))
-				}
+				evaluateBoolType2Flag(&flags, flagKey, flagValue.(bool))
 			}
 
 			if checkStringSliceContains(type3Flags, flagKey) {
-				if flagValue.(bool) {
-					flags = append(flags, fmt.Sprintf("--%s", flagKey))
-				}
+				evaluateBoolType3Flag(&flags, flagKey, flagValue.(bool))
 			}
 		}
 	}

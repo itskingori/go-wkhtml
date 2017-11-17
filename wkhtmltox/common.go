@@ -17,6 +17,10 @@
 
 package wkhtmltox
 
+import (
+	"fmt"
+)
+
 type flagSet map[string]interface{}
 
 // CookieSet represents cookie name and value
@@ -39,4 +43,56 @@ func checkStringSliceContains(ss []string, str string) bool {
 	}
 
 	return false
+}
+
+func evaluateIntFlag(flags *[]string, flagKey string, flagValue int) {
+	*flags = append(*flags, fmt.Sprintf("--%s", flagKey), fmt.Sprintf("%d", flagValue))
+}
+
+func evaluateStringFlag(flags *[]string, flagKey string, flagValue string) {
+	*flags = append(*flags, fmt.Sprintf("--%s", flagKey), fmt.Sprintf("%s", flagValue))
+}
+
+func evaluateFloat64Flag(flags *[]string, flagKey string, flagValue float64) {
+	*flags = append(*flags, fmt.Sprintf("--%s", flagKey), fmt.Sprintf("%v", flagValue))
+}
+
+func evaluateCookieSetSliceFlag(flags *[]string, flagKey string, flagValue []CookieSet) {
+	for _, cs := range flagValue {
+		*flags = append(*flags, fmt.Sprintf("--%s", flagKey), cs.Name, cs.Value)
+	}
+}
+
+func evaluateHeaderSetSliceFlag(flags *[]string, flagKey string, flagValue []HeaderSet) {
+	for _, hs := range flagValue {
+		*flags = append(*flags, fmt.Sprintf("--%s", flagKey), hs.Name, hs.Value)
+	}
+}
+
+func evaluateStringSliceFlag(flags *[]string, flagKey string, flagValue []string) {
+	for _, flagValueChild := range flagValue {
+		*flags = append(*flags, fmt.Sprintf("--%s", flagKey), fmt.Sprintf("%s", flagValueChild))
+	}
+}
+
+func evaluateBoolType1Flag(flags *[]string, flagKey string, flagValue bool) {
+	if flagValue {
+		*flags = append(*flags, fmt.Sprintf("--%s", flagKey))
+	} else {
+		*flags = append(*flags, fmt.Sprintf("--no-%s", flagKey))
+	}
+}
+
+func evaluateBoolType2Flag(flags *[]string, flagKey string, flagValue bool) {
+	if flagValue {
+		*flags = append(*flags, fmt.Sprintf("--enable-%s", flagKey))
+	} else {
+		*flags = append(*flags, fmt.Sprintf("--disable-%s", flagKey))
+	}
+}
+
+func evaluateBoolType3Flag(flags *[]string, flagKey string, flagValue bool) {
+	if flagValue {
+		*flags = append(*flags, fmt.Sprintf("--%s", flagKey))
+	}
 }
