@@ -145,11 +145,11 @@ func TestImageFlagSetGetCustomHeader(t *testing.T) {
 	attribute := "custom-header"
 	headers := []wkhtmltox.HeaderSet{
 		wkhtmltox.HeaderSet{
-			Name:  "cookie1",
+			Name:  "header1",
 			Value: "value1",
 		},
 		wkhtmltox.HeaderSet{
-			Name:  "cookie2",
+			Name:  "header2",
 			Value: "value2",
 		},
 	}
@@ -481,11 +481,11 @@ func TestImageFlagSetSetCustomHeader(t *testing.T) {
 	attribute := "custom-header"
 	headers := []wkhtmltox.HeaderSet{
 		wkhtmltox.HeaderSet{
-			Name:  "cookie1",
+			Name:  "header1",
 			Value: "value1",
 		},
 		wkhtmltox.HeaderSet{
-			Name:  "cookie2",
+			Name:  "header2",
 			Value: "value2",
 		},
 	}
