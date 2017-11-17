@@ -498,18 +498,6 @@ func TestPDFFlagSetGetUsername(t *testing.T) {
 	}
 }
 
-func TestPDFFlagSetGetWidth(t *testing.T) {
-	attribute := "width"
-	width := 640
-	pfs := make(wkhtmltox.PDFFlagSet)
-	pfs["width"] = width
-	result, exists := pfs.GetWidth()
-
-	if !exists || result != width {
-		t.Fatalf("expected %s to be %d, got %d", attribute, width, result)
-	}
-}
-
 func TestPDFFlagSetGetZoom(t *testing.T) {
 	attribute := "zoom"
 	zoom := 1.5
@@ -922,17 +910,6 @@ func TestPDFFlagSetSetUsername(t *testing.T) {
 
 	if pfs[attribute] != username {
 		t.Fatalf("expected %s to be %s, got %s", attribute, username, pfs[attribute])
-	}
-}
-
-func TestPDFFlagSetSetWidth(t *testing.T) {
-	attribute := "width"
-	width := 640
-	pfs := make(wkhtmltox.PDFFlagSet)
-	pfs.SetWidth(width)
-
-	if pfs[attribute] != width {
-		t.Fatalf("expected %s to be %d, got %d", attribute, width, pfs[attribute])
 	}
 }
 

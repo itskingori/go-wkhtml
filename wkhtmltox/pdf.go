@@ -66,7 +66,6 @@ type PDFOptions struct {
 	Title                   *string      `json:"title,omitempty"`                     // The title of the generated PDF file
 	UseXServer              *bool        `json:"use_xserver,omitempty"`               // Use the X server
 	Username                *string      `json:"username,omitempty"`                  // HTTP Authentication username
-	Width                   *int         `json:"width,omitempty"`                     // Set screen width, as a guide ... needs SmartWidth disabled to enforce
 	Zoom                    *float64     `json:"zoom,omitempty"`                      // Use this zoom factor
 }
 
@@ -212,10 +211,6 @@ func NewPDFFlagSetFromOptions(opts *PDFOptions) PDFFlagSet {
 
 	if opts.Username != nil {
 		pfs.SetUsername(*opts.Username)
-	}
-
-	if opts.Width != nil {
-		pfs.SetWidth(*opts.Width)
 	}
 
 	if opts.Zoom != nil {
@@ -481,13 +476,6 @@ func (pfs *PDFFlagSet) GetUsername() (string, bool) {
 	return value.(string), exists
 }
 
-// GetWidth retrieves the Width from a PDFFlagSet
-func (pfs *PDFFlagSet) GetWidth() (int, bool) {
-	value, exists := (*pfs)["width"]
-
-	return value.(int), exists
-}
-
 // GetZoom retrieves the Zoom from a PDFFlagSet
 func (pfs *PDFFlagSet) GetZoom() (float64, bool) {
 	value, exists := (*pfs)["zoom"]
@@ -668,11 +656,6 @@ func (pfs *PDFFlagSet) SetUseXServer(value bool) {
 // SetUsername sets the Username of a PDFFlagSet
 func (pfs *PDFFlagSet) SetUsername(username string) {
 	(*pfs)["username"] = username
-}
-
-// SetWidth sets the Width of a PDFFlagSet
-func (pfs *PDFFlagSet) SetWidth(width int) {
-	(*pfs)["width"] = width
 }
 
 // SetZoom sets the Zoom of a PDFFlagSet
