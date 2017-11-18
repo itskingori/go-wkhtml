@@ -7,58 +7,77 @@ Golang wrapper for `wkhtmltoimage` and `wkhtmltopdf`.
 
 ## Usage
 
-### Image
-
-To render an image: pass in the options, generate a flag-set then call generate
-on the flag-set ...
+### Image Example
 
 ```go
 import (
 	"fmt"
-	"path/filepath"
 	"github.com/itskingori/go-wkhtml/wkhtmltox"
 )
 
+// Attributes
 format := "png"
 width := 640
 height := 480
-opts := wkhtmltox.ImageOptions{
-	Format: &format,
-	Width:  &width,
-	Height: &height,
+
+// Method 1: Construct ImageFlagSet, then generate
+ifs := make(wkhtmltox.ImageFlagSet)
+ifs.SetFormat(format)
+ifs.SetHeight(width)
+ifs.SetWidth(height)
+outputLogs, _ := ifs.Generate("http://duckduckgo.com", "/some/path/file.png")
+fmt.Println(outputLogs)
+
+// Method 2: Construct ImageOptions, extract ImageFlagSet, then generate
+opts := wkhtmltox.ImageOptions{Format: &format, Width:  &width, Height: &height}
+ifs = wkhtmltox.NewImageFlagSetFromOptions(&opts)
+outputLogs, _ = ifs.Generate("http://duckduckgo.com", "/some/path/file.png")
+fmt.Println(outputLogs)
+
+// Method 3: Construct ImageOptions from JSON, extract ImageFlagSet, then generate
+str := []byte(`{"format":"png","width": 640,"height": 480}`)
+opts = wkhtmltox.ImageOptions{}
+err := json.NewDecoder(str).Decode(&opts)
+if err != nil {
+	panic(err)
 }
-ifs := opts.FlagSet()
-
-inputURL := "http://duckduckgo.com"
-outputFile = filepath.Join("/some/path", "file.png")
-outputLogs, _ := ifs.Generate(inputURL, outputFile)
-
+ifs = wkhtmltox.NewImageFlagSetFromOptions(&opts)
+outputLogs, _ = ifs.Generate("http://duckduckgo.com", "/some/path/file.png")
 fmt.Println(outputLogs)
 ```
 
-### PDF
-
-To render a pdf: pass in the options, generate a flag-set then call generate
-on the flag-set ...
-
+### PDF Example
 
 ```go
 import (
 	"fmt"
-	"path/filepath"
 	"github.com/itskingori/go-wkhtml/wkhtmltox"
 )
 
+// Attributes
 pageSize := "A4"
-opts := wkhtmltox.PDFOptions{
-	PageSize: &pageSize,
+
+// Method 1: Construct PDFFlagSet, then generate
+pfs := make(wkhtmltox.PDFFlagSet)
+pfs.SetPageSize(pageSize)
+outputLogs, _ := pfs.Generate("http://duckduckgo.com", "/some/path/file.pdf")
+fmt.Println(outputLogs)
+
+// Method 2: Construct PDFOptions, extract PDFFlagSet, then generate
+opts := wkhtmltox.PDFOptions{PageSize: &pageSize}
+pfs = wkhtmltox.NewPDFFlagSetFromOptions(&opts)
+outputLogs, _ = pfs.Generate("http://duckduckgo.com", "/some/path/file.pdf")
+fmt.Println(outputLogs)
+
+// Method 3: Construct PDFOptions from JSON, extract PDFFlagSet, then generate
+str := []byte(`{"page_size":"A4"}`)
+opts = wkhtmltox.PDFOptions{}
+err := json.NewDecoder(str).Decode(&opts)
+if err != nil {
+	panic(err)
 }
-pfs := opts.FlagSet()
-
-inputURL := "http://duckduckgo.com"
-outputFile = filepath.Join("/some/path", "file.pdf")
-outputLogs, _ := pfs.Generate(inputURL, outputFile)
-
+pfs = wkhtmltox.NewPDFFlagSetFromOptions(&opts)
+outputLogs, _ = pfs.Generate("http://duckduckgo.com", "/some/path/file.pdf")
 fmt.Println(outputLogs)
 ```
 
