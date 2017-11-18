@@ -17,10 +17,6 @@
 
 package wkhtmltox
 
-import (
-	"os/exec"
-)
-
 const (
 	pdfConverterBinary = "wkhtmltopdf"
 )
@@ -714,15 +710,7 @@ func (pfs *PDFFlagSet) SetZoom(zoom float64) {
 
 // Generate performs the PDF conversion and saves the file to disk
 func (pfs *PDFFlagSet) Generate(inputURL string, outputFile string) ([]byte, error) {
-	var out []byte
-
-	params := pfs.Flags()
-	params = append(params, inputURL, outputFile)
-	cmd := exec.Command(pdfConverterBinary, params...)
-	out, err := cmd.CombinedOutput()
-	if err != nil {
-		return out, err
-	}
+	out, err := runConversionCommand(pdfConverterBinary, pfs.Flags(), &inputURL, &outputFile)
 
 	return out, err
 }

@@ -19,6 +19,7 @@ package wkhtmltox
 
 import (
 	"fmt"
+	"os/exec"
 )
 
 type flagSet map[string]interface{}
@@ -95,4 +96,21 @@ func evaluateBoolType3Flag(flags *[]string, flagKey string, flagValue bool) {
 	if flagValue {
 		*flags = append(*flags, fmt.Sprintf("--%s", flagKey))
 	}
+}
+
+func runConversionCommand(binary string, params []string, inputURL *string, outputFile *string) ([]byte, error) {
+	var out []byte
+
+	// I'm uncertain if we need to escape parameters ... can't seem to find
+	// anything conclusive yet, but so far this seems to be the best find:
+	// https://stackoverflow.com/a/8025343/2184155
+
+	params = append(params, *inputURL, *outputFile)
+	cmd := exec.Command(binary, params...)
+	out, err := cmd.CombinedOutput()
+	if err != nil {
+		return out, err
+	}
+
+	return out, err
 }

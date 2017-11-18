@@ -17,10 +17,6 @@
 
 package wkhtmltox
 
-import (
-	"os/exec"
-)
-
 const (
 	imageConverterBinary = "wkhtmltoimage"
 )
@@ -556,15 +552,7 @@ func (ifs *ImageFlagSet) SetZoom(zoom float64) {
 
 // Generate performs the image conversion and saves the file to disk
 func (ifs *ImageFlagSet) Generate(inputURL string, outputFile string) ([]byte, error) {
-	var out []byte
-
-	params := ifs.Flags()
-	params = append(params, inputURL, outputFile)
-	cmd := exec.Command(imageConverterBinary, params...)
-	out, err := cmd.CombinedOutput()
-	if err != nil {
-		return out, err
-	}
+	out, err := runConversionCommand(imageConverterBinary, ifs.Flags(), &inputURL, &outputFile)
 
 	return out, err
 }
