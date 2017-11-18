@@ -1,3 +1,5 @@
+SHELL := /bin/bash
+
 testing_dependencies:
 	# install golint
 	go get -u github.com/golang/lint/golint
